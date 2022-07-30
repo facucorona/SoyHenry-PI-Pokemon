@@ -1,0 +1,11 @@
+{
+  "name": "pi-pokemon-main",
+  "version": "1.0.0",
+  "description": "![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
