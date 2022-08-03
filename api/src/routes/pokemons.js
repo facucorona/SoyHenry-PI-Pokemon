@@ -14,24 +14,47 @@ router.get("/", async (req, res, next) => {
         let { name } = req.query;
         name = name.toLowerCase();
 
-        let searchApi = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then(s=>{
+        //busca en api externa
+        let searchApi = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        .then(s=>{
             if (s.status !== 404){ return s.json()}
             else{
               return []
             }
-          })
-        
-        let searchDb = await Pokemon.findAll().then((db)=>{
-          if(db === null || db === undefined){db=[]}
-          return db
+         }).then(i=>{            
+            if (i.name){
+              let typesString = "";
+              i.types.forEach((t)=>{
+                  typesString = typesString + t.type.name + ", "
+                  }) 
+              return({
+              pokemonType : typesString,
+              hp : i.stats[0].base_stat,
+              defense : i.stats[2].base_stat,
+              attack : i.stats[1].base_stat,
+              speed : i.stats[5].base_stat,
+              weight : i.weight,
+              height : i.height,
+              image : i.sprites.other.dream_world.front_default,
+              name : i.name,
+              id : i.id,
+            })
 
-        }).then((a)=>{
-          let newSearch = a.map((a)=>{      
-          if (a.name.toLowerCase() === name.toLowerCase()){return a}
-          return undefined
+            }
+            return []
           })
-          return newSearch
-        })
+        //busca en DB
+        let searchDb = await Pokemon.findAll()
+          .then((db)=>{
+            if(db === null || db === undefined){db=[]}
+            return db
+          }).then((a)=>{
+            let newSearch = a.map((a)=>{      
+            if (a.name.toLowerCase() === name.toLowerCase()){return a}
+            return undefined
+            })
+            return newSearch
+          })
 
         let fullArray = searchDb.concat(searchApi).filter(el => el != null)
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import style from './styles/Detail.module.css'
 import { Card } from './Card'
-import { getDetails } from '../store/actions/index'
+import { getDetails, cleanState } from '../store/actions/index'
 
 function Detail() {
     let { id } = useParams()
@@ -14,7 +14,14 @@ function Detail() {
         dispatch(getDetails(id))
     }, [dispatch, id]);
 
+    useEffect(() => {
+        return dispatch(cleanState())
+    }, []);
+
+
+
     let detailFetch = useSelector(state => state.pokemonDetail)
+
 
 
     return (
@@ -39,6 +46,7 @@ function Detail() {
             <NavLink to="/home">
                 <input type="button" value="Back" />
             </NavLink>
+
         </div>
     )
 }

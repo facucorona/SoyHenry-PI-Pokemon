@@ -1,6 +1,8 @@
 import {
     GET_POKEMONS,
     GET_DETAILS,
+    CLEAN_STATE,
+    SEARCH,
 } from "../actions"
 
 const initialState = {
@@ -21,6 +23,19 @@ export default function rootReducer(state = initialState, action) {
     return { 
         ...state,
         pokemonDetail: action.payload 
+    }
+  case CLEAN_STATE:
+    return { 
+        ...state,
+        pokemonDetail: action.payload 
+    }
+
+  case SEARCH:
+    console.log(action.payload)
+    return { 
+        ...state,
+        pokemons_backup: state.pokemons,
+        pokemons: action.payload,
     }
 
   default:

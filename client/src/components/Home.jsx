@@ -23,19 +23,16 @@ function Home() {
     }
     let [pageIndex, setPageIndex] = useState(0)
 
-    // function onClickPage(e) {
-    //     // e.preventDefault();
-    //     console.log(e)
-    // }
+
     function onCickPrev(e) {
-        console.log(e)
+        // console.log(e.target.value)
         e.preventDefault();
         let aux = pageIndex - 1
         if (aux < 0) { return pageIndex }
         return setPageIndex(aux)
     }
     function onCickNext(e) {
-        console.log(e)
+        // console.log(e.target.value)
         e.preventDefault();
         let aux = pageIndex + 1
         if (aux > arrayOfPages.length - 1) { return pageIndex }
@@ -48,7 +45,7 @@ function Home() {
             <div>Page {pageIndex + 1} from {arrayOfPages.length}</div>
             {/* <div>Page <input placeholder={pageIndex + 1} /> from {arrayOfPages.length}</div> */}
             <input type="button" value="Prev" onClick={e => onCickPrev(e)} />
-            <input type="button" value="next" onClick={e => onCickNext(e)} />
+            <input type="button" value="Next" onClick={e => onCickNext(e)} />
             {
                 (arrayOfPages === []) ? (<div>
                     <h1>loading...</h1>
