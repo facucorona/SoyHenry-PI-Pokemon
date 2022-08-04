@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom'
 import style from './styles/Home.module.css'
 import { getPokemons } from '../store/actions/index'
 import Card from './Card'
+import Filter from './Filter'
+import Order from './Order'
 
 function Home() {
 
@@ -46,6 +48,9 @@ function Home() {
             {/* <div>Page <input placeholder={pageIndex + 1} /> from {arrayOfPages.length}</div> */}
             <input type="button" value="Prev" onClick={e => onCickPrev(e)} />
             <input type="button" value="Next" onClick={e => onCickNext(e)} />
+            <div className={style.filterOrder}>
+                <Filter />
+            </div>
             {
                 (arrayOfPages === []) ? (<div>
                     <h1>loading...</h1>
@@ -55,7 +60,6 @@ function Home() {
                             <div className={style.cardContainer}>
                                 <NavLink to={`/detail/${p.id}`} className={style.navLink}>
                                     <Card key={p.id} name={p.name} image={p.image} type={p.pokemonType} />
-                                    {/* <input type="button" value="More" /> */}
                                 </NavLink>
                             </div>
                         )

@@ -33,20 +33,29 @@ function Detail() {
 
     return (
         <div className={style.container}>
+
             <h1>{detailFetch.name}</h1>
+
             <img src={detailFetch.image} alt="image" /><br />
+
             <h2>Pokemon Type:</h2>
             <h3>{detailFetch.pokemonType}</h3>
+
             <h2>Pokemon Health Points:</h2>
             <h3>{detailFetch.hp}</h3>
+
             <h2>Attack:</h2>
             <h3>{detailFetch.attack}</h3>
+
             <h2>Defense:</h2>
             <h3>{detailFetch.defense}</h3>
+
             <h2>Speed:</h2>
             <h3>{detailFetch.speed}</h3>
+
             <h2>Weight:</h2>
             <h3>{detailFetch.weight}</h3>
+
             <h2>Height:</h2>
             <h3>{detailFetch.height}</h3>
 

@@ -2,6 +2,29 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_DETAILS = "GET_DETAILS";
 export const CLEAN_STATE = "CLEAN_STATE";
 export const SEARCH = "SEARCH";
+export const GET_TYPES = "GET_TYPES"; 
+export const RESET_STATE = "RESET_STATE";
+export const FILTER_STATE = "FILTER_STATE";
+
+
+export function resetState(resetArray){
+    return async (dispatch) => {
+        dispatch({
+            type: RESET_STATE,
+            payload: resetArray,
+        })        
+    }
+}
+
+export function filterState(filteredArray){
+    console.log(filteredArray)
+    return async (dispatch) => {
+        dispatch({
+            type: FILTER_STATE,
+            payload: filteredArray,
+        })        
+    }
+}
 
 export function getPokemons(){
     return async (dispatch) => {
@@ -10,6 +33,21 @@ export function getPokemons(){
         .then((arrayFetch)=>{
             dispatch({
                 type: GET_POKEMONS,
+                payload: arrayFetch,
+            })
+
+        })
+        
+    }
+}
+
+export function getTypes(){
+    return async (dispatch) => {
+        await fetch(`http://localhost:3001/types`)
+        .then(p=>p.json())
+        .then((arrayFetch)=>{
+            dispatch({
+                type: GET_TYPES,
                 payload: arrayFetch,
             })
 
