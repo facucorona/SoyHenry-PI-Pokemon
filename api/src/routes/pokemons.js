@@ -106,6 +106,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async(req, res, next) => {
   try {
    let id = req.params.id;
+   console.log(id)
    if (id.length < 5){ let info = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(i=>i.json());
               
         let typesString = "";
@@ -126,10 +127,11 @@ router.get("/:id", async(req, res, next) => {
           })
     }else{
        let searchDb = await Pokemon.findAll().then((db)=>{
-            if(db === null || db === undefined){db=[]}
-            return db
-            }).then((a)=>{
-            if(db !== []){
+         if(db === null || db === undefined){db=[]}
+         return db
+        }).then((a)=>{
+          if(a !== []){
+              // console.log(a)
               let newSearch = a.map((a)=>{      
                   if (a.id === id){return a}
                   return undefined
@@ -137,7 +139,8 @@ router.get("/:id", async(req, res, next) => {
               return newSearch
              }
             })
-        res.send(searchDb[0])
+            searchDb = searchDb.filter(a=>(a!==null&&a!==undefined&&a!==[]))
+        res.send(searchDb)
     }
   } catch (err) {
     next(err);

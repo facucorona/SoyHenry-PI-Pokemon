@@ -21,7 +21,14 @@ function Detail() {
 
 
     let detailFetch = useSelector(state => state.pokemonDetail)
+    let objectFetch = {}
 
+    //termina de formatear lo que recibe del back
+    if (detailFetch[0]) {
+        objectFetch = detailFetch[0]
+        detailFetch = objectFetch
+    }
+    console.log(detailFetch)
 
 
     return (
