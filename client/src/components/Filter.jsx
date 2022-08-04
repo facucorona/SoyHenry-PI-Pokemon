@@ -19,7 +19,6 @@ function Filter() {
     let filtered = []
     function handleSelectChange(e) {
         e.preventDefault();
-        console.log(e.target.value)
         pokemonsState.forEach(p => {
             if (p.pokemonType.includes(e.target.value)) {
                 filtered.push(p)
@@ -28,12 +27,26 @@ function Filter() {
         setFilteredPokemons(filtered)
     }
 
+    function handleSelectChangeOrigin(e) {
+        e.preventDefault();
+        if (e.target.value === "") { setFilteredPokemons(pokemonsState) }
+        if (e.target.value === "db") {
+            let a = pokemonsState
+
+            let apiFilter = pokemonsState.filter(p => p.id.length > 8)
+            setFilteredPokemons(apiFilter)
+        }
+        if (e.target.value === "api") {
+            let apiFilter = pokemonsState.filter(p => typeof (p.id) === "number")
+            setFilteredPokemons(apiFilter)
+        }
+    }
+
     useEffect(() => {
         if (filteredPokemons !== undefined) { dispatch(filterState(filteredPokemons)) }
     }, [dispatch, filteredPokemons])
 
     function onClickReset() {
-        // dispatch(filterState(pokemonsState));
         setFilteredPokemons(backupState)
     }
 
@@ -50,6 +63,13 @@ function Filter() {
                     })
                 }
             </select><br /><br />
+            <h4>Filter by Origin</h4>
+            <select id={'originSelector'} defaultValue={""} name={"pokemonOrigin"} onChange={e => handleSelectChangeOrigin(e)}>
+                <option value="">Select Origin</option>
+                <option value="db">DataBase</option>
+                <option value="api">External API</option>
+            </select><br /><br />
+
             {
                 //boton reset apagado, si se selecciona un filtro se activa
                 (filteredPokemons !== undefined) ? (disabledReset = false)

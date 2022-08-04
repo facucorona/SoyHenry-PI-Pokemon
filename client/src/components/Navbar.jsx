@@ -28,6 +28,7 @@ function Navbar() {
                 <input type="text" placeholder="Search Pokemon" onChange={onChangeSearch} value={searchState} />
                 <input type="submit" value="Go!" /><br />
             </form>
+            <small >Empty Search for All Pokemon</small><br /><br />
 
 
             <NavLink to="/add">
