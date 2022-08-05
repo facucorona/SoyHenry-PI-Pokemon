@@ -5,6 +5,7 @@ export const SEARCH = "SEARCH";
 export const GET_TYPES = "GET_TYPES"; 
 export const RESET_STATE = "RESET_STATE";
 export const FILTER_STATE = "FILTER_STATE";
+export const ORDER_STATE = "ORDER_STATE";
 
 
 export function resetState(resetArray){
@@ -22,6 +23,17 @@ export function filterState(filteredArray){
         dispatch({
             type: FILTER_STATE,
             payload: filteredArray,
+        })        
+    }
+}
+
+export function orderState(orderedArray){
+    console.log("orderedArray .,.,.,.,.,.,.,.,.")
+    console.log(orderedArray)
+    return async (dispatch) => {
+        dispatch({
+            type: ORDER_STATE,
+            payload: orderedArray,
         })        
     }
 }

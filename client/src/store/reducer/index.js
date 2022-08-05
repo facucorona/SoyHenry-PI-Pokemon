@@ -5,7 +5,8 @@ import {
     SEARCH,
     GET_TYPES,
     RESET_STATE,
-    FILTER_STATE
+    FILTER_STATE,
+    ORDER_STATE
 } from "../actions"
 
 const initialState = {
@@ -22,6 +23,11 @@ export default function rootReducer(state = initialState, action) {
     return { 
         ...state,
         pokemons: state.pokemons_backup,        
+    }
+  case ORDER_STATE:
+    return { 
+        ...state,
+        pokemons: action.payload,        
     }
   case FILTER_STATE:
     return { 

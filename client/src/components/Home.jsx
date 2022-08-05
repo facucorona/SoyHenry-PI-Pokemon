@@ -50,6 +50,7 @@ function Home() {
             <input type="button" value="Next" onClick={e => onCickNext(e)} />
             <div className={style.filterOrder}>
                 <Filter />
+                <Order />
             </div>
             {
                 (arrayOfPages === []) ? (<div>

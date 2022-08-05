@@ -66,8 +66,8 @@ function Filter() {
             <h4>Filter by Origin</h4>
             <select id={'originSelector'} defaultValue={""} name={"pokemonOrigin"} onChange={e => handleSelectChangeOrigin(e)}>
                 <option value="">Select Origin</option>
-                <option value="db">DataBase</option>
-                <option value="api">External API</option>
+                <option value="db">Created</option>
+                <option value="api">Existing</option>
             </select><br /><br />
 
             {
