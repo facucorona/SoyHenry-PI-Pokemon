@@ -11,7 +11,9 @@ function Filter() {
 
     let disabledReset = true;
     let typesFetch = useSelector(state => state.types)
+    typesFetch.sort()
     let pokemonsState = useSelector(state => state.pokemons_backup)
+    let pokemonsMain = useSelector(state => state.pokemons)
     let backupState = pokemonsState
 
     let [filteredPokemons, setFilteredPokemons] = useState()
@@ -33,11 +35,11 @@ function Filter() {
         if (e.target.value === "db") {
             let a = pokemonsState
 
-            let apiFilter = pokemonsState.filter(p => p.id.length > 8)
+            let apiFilter = pokemonsMain.filter(p => p.id.length > 8)
             setFilteredPokemons(apiFilter)
         }
         if (e.target.value === "api") {
-            let apiFilter = pokemonsState.filter(p => typeof (p.id) === "number")
+            let apiFilter = pokemonsMain.filter(p => typeof (p.id) === "number")
             setFilteredPokemons(apiFilter)
         }
     }

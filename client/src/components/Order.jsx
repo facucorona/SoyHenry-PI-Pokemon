@@ -7,33 +7,34 @@ import style from './styles/Order.module.css'
 function Order() {
 
     let fullPokemons = useSelector(state => state.pokemons);
-    let fullPokemons_backup = useSelector(state => state.pokemons_backup);
     let full = fullPokemons
     let full2 = fullPokemons
+
+    let fullPokemons_backup = useSelector(state => state.pokemons_backup);
 
     let dispatch = useDispatch();
 
     function handleChange(e) {
         e.preventDefault();
-
+        //arma array con los nombres, lo ordena,y luego busca los pkmn en ese orden        
         let arrName = fullPokemons.map(p => p.name)
         arrName.sort()
         let orderedAlph = []
         for (let i = 0; i < fullPokemons.length; i++) {
             full.forEach(p => {
-                if (p.name === arrName[i]) {
 
+                if (p.name === arrName[i]) {
                     orderedAlph.push(p)
+                    //vacía 
                     p = []
                 }
             })
         }
 
-
         let arrAtt = fullPokemons.map(p => {
             return p.attack
         })
-        arrAtt = [... new Set(arrAtt)]
+        arrAtt = [...new Set(arrAtt)]
         arrAtt.sort(function (a, b) { return a - b });
         // console.log(arrAtt)
         let orderedAttack = []
@@ -45,11 +46,9 @@ function Order() {
             })
         }
 
-
         if (e.target.value === "not") { dispatch(orderState(fullPokemons_backup)) }
         if (e.target.value === "abc") { dispatch(orderState(orderedAlph)) }
         if (e.target.value === "zyx") { dispatch(orderState(orderedAlph.reverse())) }
-        console.log(orderedAttack)
         if (e.target.value === "attasc") { dispatch(orderState(orderedAttack)) }
         if (e.target.value === "attdesc") { dispatch(orderState(orderedAttack.reverse())) }
 
