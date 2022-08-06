@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    direction: column;
+    align-content: space-around;
+}
+
+.pkContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+    padding: 3rem;
+    justify-content: space-around;
+    border-radius: 5px;
+    align-items: center;
+
+}
+
+.navFilterOrder {
+    /* backdrop-filter: blur(0.80rem); */
+    padding-left: 4%;
+    padding-top: 4%;
+
+    flex-direction: column-reverse;
+}
+
+.divPaginationText {
+    color: rgb(183, 183, 183);
+    text-shadow: 0px 4px 10px rgba(9, 9, 9, 0.89);
+    -webkit-text-stroke: 0.002px rgb(165, 165, 165);
+}

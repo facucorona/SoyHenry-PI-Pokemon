@@ -65,15 +65,23 @@ function Add() {
             <br />
             <br />
             <form>
-                <input onChange={e => handleChange(e)} type="text" placeholder="Name" name="name" /> <br /><br />
+                <small>Name: </small> <br />
+                <input onChange={e => handleChange(e)} type="text" placeholder="Name" name="name" /><br />
+                <small>Numbers & Symbols not allowed.</small><br /> <br />
+                <small>Health Points: </small> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Health Points" min="0" name="hp" /><br /><br />
+                <small>Defense: </small> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Defense" min="0" name="defense" /><br /><br />
+                <small>Attack: </small> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Attack" min="0" name="attack" /><br /><br />
+                <small>Speed: </small> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Speed" min="0" name="speed" /><br /><br />
+                <small>Weight: </small> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Weight" min="0" name="weight" /><br /><br />
+                <small>Height: </small> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Height" min="0" name="height" /><br /><br />
 
-                <h4>Select Types</h4>
+                <h4>Select Types:</h4>
                 <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
                     <option value="">Select Type</option>
                     {
@@ -87,10 +95,11 @@ function Add() {
 
                 <h3>{selectedTypes.map(t => <div onClick={onClickType} id={t} value={t}>{t}</div>)}</h3>
 
+                <small>Picture URL: </small> <br />
                 <input onChange={e => handleChange(e)} type="text" placeholder="Image" name="image" /><br /><br />
 
                 <input type="button" value="Go!" onClick={e => onSubmit(e)} /><br />
-            </form>
+            </form><br /><br />
             <NavLink to="/home">
                 <input type="button" value="Back Home" />
             </NavLink>

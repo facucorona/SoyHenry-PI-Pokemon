@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(255, 255, 1, 1);
+    border-radius: 0px;
+    height: 70px;
+    width: 100%;
+    margin-top: 0px;
+    align-content: space-around;
+    box-shadow: -2px 2px 10px 0.5px hsl(345, 100%, 50%);
+    border-bottom: 3px solid black;
+}
+
+.logoHenry {
+    display: flex;
+}
+
+.searchForm {
+    padding-top: 1vw;
+}
+
+.addButton {
+    padding-top: 1vw;
+    padding-right: 1vw;
+
+}
+
+.button:hover {
+    box-shadow: -2px 2px 10px 0.5px hsl(29, 100%, 52%);
+
+}

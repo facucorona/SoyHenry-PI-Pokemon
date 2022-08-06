@@ -1,0 +1,25 @@
+.container {
+    margin-top: 5vw;
+    border: 1px solid black;
+    width: 30vw;
+    height: 65vh;
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.361);
+    backdrop-filter: blur(0.40rem);
+
+    /* box-shadow: 2px 4px 10px 4px #514670; */
+
+    font-size: 0.6vw;
+
+
+
+    /* border: 1px solid black; */
+    /* background: rgba(255, 255, 255, 0.15); */
+    /* backdrop-filter: blur(0.75rem); */
+    margin: 70px;
+    box-shadow: 2px 4px 10px 4px #514670,
+        inset 0 8px 60px rgba(0, 0, 0, 0.1);
+    /* border-radius: 10px; */
+    padding: 25px;
+}

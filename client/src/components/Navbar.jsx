@@ -22,17 +22,23 @@ function Navbar() {
 
     return (
         <div className={style.container}>
-            <h1>SoyHenry Pokedex</h1>
+            <div className={style.logoHenry}>
+                <NavLink to="/">
 
-            <form onSubmit={onSubmitSearch}>
+                    <img src="https://assets.soyhenry.com/LOGO-REDES-01_og.jpg" alt="" className={style.henryLogo} height="60px" />
+                </NavLink>
+                <h1 className={style.head}>SoyHenry Pokédex</h1>
+            </div>
+
+            <form onSubmit={onSubmitSearch} className={style.searchForm}>
                 <input type="text" placeholder="Search Pokemon" onChange={onChangeSearch} value={searchState} />
                 <input type="submit" value="Go!" /><br />
+                <small >Empty Search for All Pokemon</small><br /><br />
             </form>
-            <small >Empty Search for All Pokemon</small><br /><br />
 
 
-            <NavLink to="/add">
-                <input type="button" value="New Pokemon" /><br />
+            <NavLink to="/add" className={style.addButton}>
+                <input className={style.button} type="button" value="New Pokemon" /><br />
             </NavLink>
 
         </div>

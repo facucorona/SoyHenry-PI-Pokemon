@@ -4,9 +4,9 @@ import style from './styles/Landing.module.css'
 
 function Landing() {
     return (
-        <div className={style.container}>
+        <div key={"landingContainer"} className={style.container}>
             <NavLink to={'/home'}>
-                <h2>enter</h2>
+                <button className={style.button}>Enter Pokédex</button>
             </NavLink>
         </div>
     )
