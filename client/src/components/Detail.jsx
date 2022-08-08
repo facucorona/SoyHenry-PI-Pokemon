@@ -28,11 +28,13 @@ function Detail() {
         objectFetch = detailFetch[0]
         detailFetch = objectFetch
     }
-    console.log(detailFetch)
+    // console.log(detailFetch)
+    let varrr = document.getElementsByName("name")
+    console.log(varrr)
 
 
     return (
-        <div className={style.container}>
+        <div id="container" className={style.container}>
 
             <h1>{detailFetch.name}</h1>
 

@@ -29,19 +29,24 @@
 
 
  .button {
-     border-radius: 15px;
+     border-radius: 50%;
      border: 3px solid black;
      text-decoration: none;
+     text-size-adjust: 100%;
+     backdrop-filter: blur(0.5);
      color: black;
-     border-radius: 10px;
+     /* border-radius: 10px; */
      margin-left: 5px;
      margin-right: 10px;
      padding: 3px;
-     background: rgb(255, 255, 1);
-     margin-top: 47vh;
+     background: rgb(255, 255, 1, 0.5);
+     margin-top: 43vh;
+     height: 150px;
+     width: 150px
  }
 
  .button:hover {
 
-     box-shadow: 2px 4px 10px 4px rgb(255, 34, 0);
+     background: rgb(255, 255, 1);
+     box-shadow: 2px 4px 10px 4px rgba(116, 4, 202, 0.426);
  }

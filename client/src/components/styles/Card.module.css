@@ -3,6 +3,7 @@
     width: 330px;
     height: 430px;
     border-radius: 8px;
+    overflow: hidden;
 
     background: rgba(255, 255, 255, 0.361);
     backdrop-filter: blur(0.75rem);
@@ -14,11 +15,12 @@
     color: rgb(0, 0, 0);
     text-shadow: 0px 4px 10px rgba(9, 9, 9, 0.89);
     -webkit-text-stroke: 0.002px rgb(165, 165, 165);
+
 }
 
 .image {
-    width: 90%;
-    height: 70%;
+    width: 80%;
+    height: 60%;
 
 }
 
