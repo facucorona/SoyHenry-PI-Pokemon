@@ -93,8 +93,13 @@ function Add() {
     }
 
     function handleSelectChange(e) {
-        if (selectedTypes === []) {
-            setTypeAdvert(false)
+        if (document.getElementById("typeSelector").value === "" && selectedTypes === []) {
+            return setTypeAdvert(false)
+        }
+        let selectedChecked = selectedTypes.filter(p => p !== "")
+
+        if (selectedChecked === []) {
+            return setTypeAdvert(false)
         } else {
             if (selectedTypes.includes(e.target.value)) {
                 return (
@@ -140,37 +145,37 @@ function Add() {
 
     return (
         <div className={style.container}>
-            <h2>New Pokemon on Pokedex</h2>
+            <h1>New Pokemon on Pokedex</h1>
             <br />
             <br />
             <form>
                 <label>Name </label> <br />
                 <input onChange={e => handleChange(e)} type="text" placeholder="Name" name="name" /><br />
-                <small hidden={nameAdvert}>Numbers & Symbols not allowed.</small><br /> <br />
+                <small className={style.allow} hidden={nameAdvert}>Numbers & Symbols not allowed.</small><br /> <br />
 
                 <label>Health Points </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Health Points" min="0" name="hp" /><br />
-                <small hidden={hpAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={hpAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Defense </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Defense" min="0" name="defense" /><br />
-                <small hidden={defenseAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={defenseAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Attack </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Attack" min="0" name="attack" /><br />
-                <small hidden={attackAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={attackAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Speed </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Speed" min="0" name="speed" /><br />
-                <small hidden={speedAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={speedAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Weight </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Weight" min="0" name="weight" /><br />
-                <small hidden={weightAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={weightAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Height </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Height" min="0" name="height" /><br />
-                <small hidden={heightAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={heightAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Select Types:</label> <br />
                 <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
@@ -183,7 +188,7 @@ function Add() {
                         })
                     }
                 </select><br />
-                <small hidden={typeAdvert}>Select at least One type.</small><br />
+                <small className={style.allow} hidden={typeAdvert}>Select at least One type.</small><br />
 
                 <h3>{selectedTypes.map(t => <div onClick={onClickType} id={t} value={t}>{t}</div>)}</h3>
 
@@ -192,7 +197,7 @@ function Add() {
                 <small hidden={imageAdvert}>Insert an Image URL-JPG válida</small><br />
 
                 <input type="button" value="Go!" onClick={e => onSubmit(e)} /><br />
-                <small hidden={globalAdvert}>Please Fill all fields correctly.</small><br />
+                <small className={style.allow} hidden={globalAdvert}>Please Fill all fields correctly.</small><br />
             </form><br /><br />
             <NavLink to="/home">
                 <input type="button" value="Back Home" />
