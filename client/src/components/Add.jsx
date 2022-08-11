@@ -16,10 +16,11 @@ function Add() {
     let [selectedTypes, setSelectedTypes] = useState([])
     let [newPokemonObject, setNewPokemonObject] = useState()
 
-    // let regExpName = RegExp(/^[\w\,:\-'\s\.]+$/)
+
     let regExpName = RegExp(/^[a-zA-Z]+$/)
     let regExpNumber = RegExp(/^[0-9]+$/)
-    let regExpImage = RegExp(/^[0-9]+$/)
+    let regExpUrl = RegExp(/^(https?:\/\/.*\.(?:jpg|jpeg|gif))$/)
+
 
     let [nameAdvert, setNameAdvert] = useState(true)
     let [hpAdvert, setHpAdvert] = useState(true)
@@ -89,28 +90,30 @@ function Add() {
 
             }
         }
+        if (e.target.name === "image") {
+            if (!regExpUrl.test(e.target.value)) { setImageAdvert(false) }
+            else {
+                setImageAdvert(true);
+                setNewPokemonObject({ ...newPokemonObject, [e.target.name]: e.target.value })
+                console.log(newPokemonObject)
+
+            }
+        }
         setNewPokemonObject({ ...newPokemonObject, [e.target.name]: e.target.value })
     }
 
     function handleSelectChange(e) {
-        if (document.getElementById("typeSelector").value === "" && selectedTypes === []) {
-            return setTypeAdvert(false)
-        }
-        let selectedChecked = selectedTypes.filter(p => p !== "")
+        console.log(document.getElementById("typeSelector").value)
 
-        if (selectedChecked === []) {
-            return setTypeAdvert(false)
-        } else {
-            if (selectedTypes.includes(e.target.value)) {
-                return (
-                    setNewPokemonObject({ ...newPokemonObject, [e.target.name]: selectedTypes })
-                )
-            }
-            setTypeAdvert(true)
-            setSelectedTypes([...selectedTypes, e.target.value])
-            let string = selectedTypes.toString(", ")
-            setNewPokemonObject({ ...newPokemonObject, [e.target.name]: string })
-        }
+        let currentValue = document.getElementById("typeSelector").value
+        if (currentValue === "") { return selectedTypes }
+        if (selectedTypes === []) { setTypeAdvert(false) }
+        if (selectedTypes.includes(currentValue)) { return selectedTypes }
+
+        setTypeAdvert(true)
+        setSelectedTypes([...selectedTypes, document.getElementById("typeSelector").value])
+        console.log(newPokemonObject)
+
     }
 
     async function onSubmit(e) {
@@ -142,6 +145,12 @@ function Add() {
         setNewPokemonObject({ ...newPokemonObject, pokemonType: string })
     }
 
+    function addTypes(e) {
+        e.preventDefault();
+        let string = selectedTypes.toString(", ")
+        setNewPokemonObject({ ...newPokemonObject, ["pokemonType"]: string })
+
+    }
 
     return (
         <div className={style.container}>
@@ -178,7 +187,7 @@ function Add() {
                 <small className={style.allow} hidden={heightAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Select Types:</label> <br />
-                <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
+                <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onClick={e => handleSelectChange(e)}>
                     <option value="">Select Type</option>
                     {
                         typesFetch?.map(type => {
@@ -188,13 +197,15 @@ function Add() {
                         })
                     }
                 </select><br />
+                <input type="button" value="Ok! Add Types" onClick={e => addTypes(e)} /><br />
                 <small className={style.allow} hidden={typeAdvert}>Select at least One type.</small><br />
 
                 <h3>{selectedTypes.map(t => <div onClick={onClickType} id={t} value={t}>{t}</div>)}</h3>
 
                 <label>Picture URL </label> <br />
-                <input onChange={e => handleChange(e)} type="text" placeholder="Image" name="image" /><br />
-                <small hidden={imageAdvert}>Insert an Image URL-JPG válida</small><br />
+                <input onChange={e => handleChange(e)} type="url" placeholder="Image" name="image" /><br />
+                <small className={style.allow} hidden={imageAdvert}>Insert a valid Image URL-JPG, JPEG, GIF</small><br />
+
 
                 <input type="button" value="Go!" onClick={e => onSubmit(e)} /><br />
                 <small className={style.allow} hidden={globalAdvert}>Please Fill all fields correctly.</small><br />

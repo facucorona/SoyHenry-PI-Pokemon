@@ -6,7 +6,17 @@ export const GET_TYPES = "GET_TYPES";
 export const RESET_STATE = "RESET_STATE";
 export const FILTER_STATE = "FILTER_STATE";
 export const ORDER_STATE = "ORDER_STATE";
+export const UNMOUNT_BACKUP = "UNMOUNT_BACKUP";
 
+
+export function unmountBackup(backupArray){
+    return async (dispatch) => {
+        dispatch({
+            type: UNMOUNT_BACKUP,
+            payload: backupArray,
+        })        
+    }
+}
 
 export function resetState(resetArray){
     return async (dispatch) => {

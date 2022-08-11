@@ -5,7 +5,7 @@ import style from './styles/Detail.module.css'
 import { Card } from './Card'
 import { getDetails, cleanState } from '../store/actions/index'
 
-function Detail() {
+export function Detail() {
     let { id } = useParams()
     // console.log(id)
 

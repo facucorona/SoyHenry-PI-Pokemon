@@ -30,3 +30,7 @@
         text-shadow: 0.1px 0px #000000;
         /* text-shadow: 2px 4px 10px */
     }
+
+    .allow:hover {
+        font-size: small;
+    }

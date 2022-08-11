@@ -57,7 +57,7 @@ function Order() {
 
     return (
         <div className={style.container}>
-            <h4>Select Order</h4>
+            <label>Select Order</label>
             <select id={'orderSelector'} defaultValue="not" onChange={e => handleChange(e)}>
                 <option value="not">Not Ordered</option>
                 <option value="abc">ABC</option>

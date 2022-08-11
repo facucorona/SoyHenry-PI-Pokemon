@@ -51,7 +51,7 @@ function Home() {
                 <div className={style.filterOrder}>
                     <Filter />
                     <Order /><br /><br />
-                    <div className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</div>
+                    <label className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</label>
                     <input type="button" value="Prev" onClick={e => onCickPrev(e)} />
                     <input type="button" value="Next" onClick={e => onCickNext(e)} />
                 </div>

@@ -6,19 +6,27 @@ import {
     GET_TYPES,
     RESET_STATE,
     FILTER_STATE,
-    ORDER_STATE
+    ORDER_STATE,
+    UNMOUNT_BACKUP,
 } from "../actions"
 
 const initialState = {
     pokemons : [],
     pokemons_backup: [],
     pokemonDetail : [],
-    types : []
+    types : [],
+    unmountBackup : [];
+
 }
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
 
+  case UNMOUNT_BACKUP:
+    return { 
+        ...state,
+        unmountBackup: action.payload,        
+    }
   case RESET_STATE:
     return { 
         ...state,

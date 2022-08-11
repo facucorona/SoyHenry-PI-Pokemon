@@ -54,7 +54,7 @@ function Filter() {
 
     return (
         <div className={style.container}>
-            <h4>Filter by Type</h4>
+            <label>Filter by Type</label>
             <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
                 <option value="">Select Type</option>
                 {
@@ -65,7 +65,7 @@ function Filter() {
                     })
                 }
             </select><br /><br />
-            <h4>Filter by Origin</h4>
+            <label>Filter by Origin</label>
             <select id={'originSelector'} defaultValue={""} name={"pokemonOrigin"} onChange={e => handleSelectChangeOrigin(e)}>
                 <option value="">Select Origin</option>
                 <option value="db">Created</option>
@@ -77,7 +77,7 @@ function Filter() {
                 (filteredPokemons !== undefined) ? (disabledReset = false)
                     : (disabledReset)
             }
-            <button disabled={disabledReset} onClick={onClickReset}>Reset</button>
+            <button disabled={disabledReset} onClick={onClickReset}>Reset</button><br /><br /><br />
         </div>
     )
 }

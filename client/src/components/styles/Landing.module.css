@@ -25,6 +25,7 @@
      font-size: 5.9vw;
      justify-content: center;
      align-items: center;
+     flex-direction: column;
  }
 
 
@@ -41,12 +42,17 @@
      padding: 3px;
      background: rgb(255, 255, 1, 0.5);
      margin-top: 43vh;
-     height: 150px;
-     width: 150px
+     height: 100px;
+     width: 100px
  }
 
  .button:hover {
 
      background: rgb(255, 255, 1);
      box-shadow: 2px 4px 10px 4px rgba(116, 4, 202, 0.426);
+ }
+
+ .press {
+     margin-top: 20vh;
+
  }
