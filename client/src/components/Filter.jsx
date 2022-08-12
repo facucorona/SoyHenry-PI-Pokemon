@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './styles/Filter.module.css'
-import { getTypes, filterState, resetState } from '../store/actions/index'
+import { getTypes, filterState, resetState, unmountBackup, getPokemons } from '../store/actions/index'
 
 function Filter() {
     let dispatch = useDispatch();
@@ -27,20 +27,25 @@ function Filter() {
             }
         })
         setFilteredPokemons(filtered)
+
+        // hace backup del estado actual para cuando se vuelva a montar el componente
+        dispatch(unmountBackup(filtered))
     }
 
     function handleSelectChangeOrigin(e) {
         e.preventDefault();
-        if (e.target.value === "") { setFilteredPokemons(pokemonsState) }
+        if (e.target.value === "") { setFilteredPokemons(pokemonsState); dispatch(unmountBackup(filteredPokemons)) }
         if (e.target.value === "db") {
-            let a = pokemonsState
+
 
             let apiFilter = pokemonsMain.filter(p => p.id.length > 8)
             setFilteredPokemons(apiFilter)
+            dispatch(unmountBackup(filteredPokemons))
         }
         if (e.target.value === "api") {
             let apiFilter = pokemonsMain.filter(p => typeof (p.id) === "number")
             setFilteredPokemons(apiFilter)
+            dispatch(unmountBackup(filteredPokemons))
         }
     }
 
@@ -49,12 +54,15 @@ function Filter() {
     }, [dispatch, filteredPokemons])
 
     function onClickReset() {
+
         setFilteredPokemons(backupState)
+        dispatch(unmountBackup([]))
+        dispatch(getPokemons())
     }
 
     return (
         <div className={style.container}>
-            <label>Filter by Type</label>
+            <label>Filter by Type</label><br />
             <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
                 <option value="">Select Type</option>
                 {
@@ -77,7 +85,7 @@ function Filter() {
                 (filteredPokemons !== undefined) ? (disabledReset = false)
                     : (disabledReset)
             }
-            <button disabled={disabledReset} onClick={onClickReset}>Reset</button><br /><br /><br />
+            <button onClick={onClickReset}>Reset</button><br /><br /><br />
         </div>
     )
 }

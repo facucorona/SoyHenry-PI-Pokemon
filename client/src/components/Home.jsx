@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import style from './styles/Home.module.css'
-import { getPokemons, resetState } from '../store/actions/index'
+import { getPokemons, resetState, unmountBackup } from '../store/actions/index'
 import Card from './Card'
 import Filter from './Filter'
 import Order from './Order'
@@ -13,13 +13,21 @@ function Home() {
 
 
     let dispatch = useDispatch();
+
+
+
     useEffect(() => {
         dispatch(getPokemons())
-        return dispatch(resetState([]))
+
     }, [dispatch]);
 
+    let lastOrder = useSelector(state => state.unmountBackup)
     let allPokemon = useSelector(state => state.pokemons)
-    // console.log(allPokemon)
+    console.log(lastOrder.length)
+    console.log(allPokemon)
+    // if (lastOrder.length !== 0) { allPokemon = lastOrder }
+
+
 
     let arrayOfPages = []
     for (let i = 0; i < allPokemon.length; i += 12) {
@@ -42,7 +50,6 @@ function Home() {
         if (aux > arrayOfPages.length - 1) { return pageIndex }
         return setPageIndex(aux)
     }
-
     return (
         <div className={style.container}>
             <nav className={style.navFilterOrder}>
@@ -51,7 +58,7 @@ function Home() {
                 <div className={style.filterOrder}>
                     <Filter />
                     <Order /><br /><br />
-                    <label className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</label>
+                    <label className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</label><br />
                     <input type="button" value="Prev" onClick={e => onCickPrev(e)} />
                     <input type="button" value="Next" onClick={e => onCickNext(e)} />
                 </div>
@@ -59,7 +66,7 @@ function Home() {
             <ul className={style.pkContainer}>
 
                 {
-                    (arrayOfPages === []) ? (<div>
+                    (allPokemon === []) ? (<div>
                         <Error />
                     </div>) :
                         arrayOfPages[pageIndex]?.map((p) => {

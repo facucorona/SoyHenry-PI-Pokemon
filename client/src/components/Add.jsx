@@ -115,21 +115,26 @@ function Add() {
         console.log(newPokemonObject)
 
     }
-
+    let [createdOk, setCreatedOk] = useState(true)
+    let [addedTypes, setAddedTypes] = useState(true)
     async function onSubmit(e) {
         e.preventDefault();
         if (nameAdvert === false || hpAdvert === false || defenseAdvert === false || attackAdvert === false || speedAdvert === false || weightAdvert === false || heightAdvert === false || imageAdvert === false || typeAdvert === false) {
             setGlobalAdvert(false)
             return
-        }
+        } else {
 
-        await fetch('http://localhost:3001/pokemons/', {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.    
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newPokemonObject) // body data type must match "Content-Type" header
-        });
+
+            setGlobalAdvert(true)
+            await fetch('http://localhost:3001/pokemons/', {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.    
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPokemonObject) // body data type must match "Content-Type" header
+            });
+            setCreatedOk(false)
+        }
     }
 
     function onClickType(e) {
@@ -149,6 +154,7 @@ function Add() {
         e.preventDefault();
         let string = selectedTypes.toString(", ")
         setNewPokemonObject({ ...newPokemonObject, ["pokemonType"]: string })
+        setAddedTypes(false)
 
     }
 
@@ -201,6 +207,7 @@ function Add() {
                 <small className={style.allow} hidden={typeAdvert}>Select at least One type.</small><br />
 
                 <h3>{selectedTypes.map(t => <div onClick={onClickType} id={t} value={t}>{t}</div>)}</h3>
+                <success className={style.created} hidden={addedTypes}>Type/s added!</success> <br />
 
                 <label>Picture URL </label> <br />
                 <input onChange={e => handleChange(e)} type="url" placeholder="Image" name="image" /><br />
@@ -209,6 +216,7 @@ function Add() {
 
                 <input type="button" value="Go!" onClick={e => onSubmit(e)} /><br />
                 <small className={style.allow} hidden={globalAdvert}>Please Fill all fields correctly.</small><br />
+                <success className={style.created} hidden={createdOk}>Pokémon Created with Success!</success> <br />
             </form><br /><br />
             <NavLink to="/home">
                 <input type="button" value="Back Home" />

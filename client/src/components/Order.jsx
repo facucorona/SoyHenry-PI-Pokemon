@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { orderState } from '../store/actions/index'
+import { orderState, unmountBackup } from '../store/actions/index'
 import style from './styles/Order.module.css'
 
 function Order() {
@@ -11,6 +11,9 @@ function Order() {
     let full2 = fullPokemons
 
     let fullPokemons_backup = useSelector(state => state.pokemons_backup);
+    let unmountedPokemon_backup = useSelector(state => state.unmountBackup);
+
+    if (unmountedPokemon_backup.length > 0) { fullPokemons = unmountedPokemon_backup }
 
     let dispatch = useDispatch();
 
@@ -22,7 +25,6 @@ function Order() {
         let orderedAlph = []
         for (let i = 0; i < fullPokemons.length; i++) {
             full.forEach(p => {
-
                 if (p.name === arrName[i]) {
                     orderedAlph.push(p)
                     //vacía 
@@ -30,10 +32,11 @@ function Order() {
                 }
             })
         }
-
         let arrAtt = fullPokemons.map(p => {
             return p.attack
         })
+
+        //elimina los valores duplicados en el array
         arrAtt = [...new Set(arrAtt)]
         arrAtt.sort(function (a, b) { return a - b });
         // console.log(arrAtt)
@@ -45,19 +48,16 @@ function Order() {
                 }
             })
         }
-
-        if (e.target.value === "not") { dispatch(orderState(fullPokemons_backup)) }
+        if (e.target.value === "not") { dispatch(orderState(fullPokemons)) }
         if (e.target.value === "abc") { dispatch(orderState(orderedAlph)) }
         if (e.target.value === "zyx") { dispatch(orderState(orderedAlph.reverse())) }
         if (e.target.value === "attasc") { dispatch(orderState(orderedAttack)) }
         if (e.target.value === "attdesc") { dispatch(orderState(orderedAttack.reverse())) }
-
     }
-
 
     return (
         <div className={style.container}>
-            <label>Select Order</label>
+            <label>Select Order</label><br />
             <select id={'orderSelector'} defaultValue="not" onChange={e => handleChange(e)}>
                 <option value="not">Not Ordered</option>
                 <option value="abc">ABC</option>

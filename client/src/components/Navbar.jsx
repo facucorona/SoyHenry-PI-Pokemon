@@ -33,7 +33,7 @@ function Navbar() {
             <form onSubmit={onSubmitSearch} className={style.searchForm}>
                 <input type="text" placeholder="Search Pokemon" onChange={onChangeSearch} value={searchState} />
                 <input type="submit" value="Go!" /><br />
-                <small >Empty Search for All Pokemon</small><br /><br />
+                <small >Empty Search for All Pokémon</small><br /><br />
             </form>
 
 

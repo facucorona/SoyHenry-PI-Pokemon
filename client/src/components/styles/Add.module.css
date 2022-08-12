@@ -34,3 +34,8 @@
     .allow:hover {
         font-size: small;
     }
+
+    .created {
+        font-size: small;
+        color: rgb(0, 255, 102)
+    }

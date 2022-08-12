@@ -15,7 +15,7 @@ const initialState = {
     pokemons_backup: [],
     pokemonDetail : [],
     types : [],
-    unmountBackup : [];
+    unmountBackup : [],
 
 }
 
