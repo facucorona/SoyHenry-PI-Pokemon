@@ -1,11 +1,11 @@
 import React from 'react';
 import {screen, render} from '@testing-library/react'
-import {Detail} from './Detail'
+import {Landing} from './Landing'
 
-describe('Testing Detail prop title: Attack', ()=>{
+describe('Testing Add prop title: Attack', ()=>{
     it('Must display an Attack title', ()=>{
-        render(<Detail/>);
-        expect(screen.queryByText(/Attack:/i)).toBeInTheDocument();
+        render(<Landing/>);
+        expect(screen.queryByText(/press the button/i)).toBeInTheDocument();
     })
     
 })

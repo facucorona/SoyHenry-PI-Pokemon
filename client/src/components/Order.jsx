@@ -11,9 +11,6 @@ function Order() {
     let full2 = fullPokemons
 
     let fullPokemons_backup = useSelector(state => state.pokemons_backup);
-    let unmountedPokemon_backup = useSelector(state => state.unmountBackup);
-
-    if (unmountedPokemon_backup.length > 0) { fullPokemons = unmountedPokemon_backup }
 
     let dispatch = useDispatch();
 

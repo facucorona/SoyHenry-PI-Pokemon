@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import style from './styles/Detail.module.css'
 import { Card } from './Card'
-import { getDetails, cleanState } from '../store/actions/index'
+import { getDetails, cleanState, filterState } from '../store/actions/index'
 
 export function Detail() {
     let { id } = useParams()
@@ -14,8 +14,9 @@ export function Detail() {
         dispatch(getDetails(id))
     }, [dispatch, id]);
 
+    let bckRestore = useSelector(state => state.unmountBackup)
     useEffect(() => {
-        return dispatch(cleanState())
+
     }, []);
 
 

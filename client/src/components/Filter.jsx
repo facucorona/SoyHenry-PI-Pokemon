@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './styles/Filter.module.css'
-import { getTypes, filterState, resetState, unmountBackup, getPokemons } from '../store/actions/index'
+import { getTypes, filterState, resetState, unmountBackup, getPokemons, cleanState } from '../store/actions/index'
 
 function Filter() {
     let dispatch = useDispatch();
@@ -29,23 +29,33 @@ function Filter() {
         setFilteredPokemons(filtered)
 
         // hace backup del estado actual para cuando se vuelva a montar el componente
-        dispatch(unmountBackup(filtered))
+        // dispatch(unmountBackup(filtered))
     }
-
+    let notFound = true;
+    let total = pokemonsMain;
+    let apiFilterDB = pokemonsMain.filter(p => p.id.length > 8)
+    const apiFilterAPI = pokemonsMain.filter(p => typeof (p.id) === "number")
     function handleSelectChangeOrigin(e) {
         e.preventDefault();
-        if (e.target.value === "") { setFilteredPokemons(pokemonsState); dispatch(unmountBackup(filteredPokemons)) }
-        if (e.target.value === "db") {
 
 
-            let apiFilter = pokemonsMain.filter(p => p.id.length > 8)
-            setFilteredPokemons(apiFilter)
-            dispatch(unmountBackup(filteredPokemons))
+        if (e.target.value === "") {
+            setFilteredPokemons(total);
+
         }
+        if (e.target.value === "db") {
+            if (apiFilterDB.length > 0) {
+                setFilteredPokemons(apiFilterDB)
+            }
+            else {
+                notFound = false;
+            }
+        }
+
         if (e.target.value === "api") {
-            let apiFilter = pokemonsMain.filter(p => typeof (p.id) === "number")
-            setFilteredPokemons(apiFilter)
-            dispatch(unmountBackup(filteredPokemons))
+
+            setFilteredPokemons(apiFilterAPI)
+            // dispatch(unmountBackup(apiFilterAPI))
         }
     }
 
@@ -54,9 +64,11 @@ function Filter() {
     }, [dispatch, filteredPokemons])
 
     function onClickReset() {
-
+        document.getElementById("typeSelector").value = "";
+        document.getElementById("originSelector").value = "";
         setFilteredPokemons(backupState)
-        dispatch(unmountBackup([]))
+        // dispatch(unmountBackup([]))
+        dispatch(cleanState())
         dispatch(getPokemons())
     }
 
@@ -64,7 +76,7 @@ function Filter() {
         <div className={style.container}>
             <label>Filter by Type</label><br />
             <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
-                <option value="">Select Type</option>
+                <option value="">~ All ~</option>
                 {
                     typesFetch?.map(type => {
                         return (
@@ -79,6 +91,7 @@ function Filter() {
                 <option value="db">Created</option>
                 <option value="api">Existing</option>
             </select><br /><br />
+            <label hidden={notFound}>Not Found</label><br /><br />
 
             {
                 //boton reset apagado, si se selecciona un filtro se activa

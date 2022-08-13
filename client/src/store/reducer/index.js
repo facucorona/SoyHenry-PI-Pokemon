@@ -43,9 +43,13 @@ export default function rootReducer(state = initialState, action) {
         pokemons: action.payload 
     }
   case GET_POKEMONS:
+    let pyld =[];
+    state.pokemons[0]===undefined?pyld=action.payload:pyld=state.pokemons
+    
     return { 
         ...state,
-        pokemons: action.payload,
+        
+        pokemons: pyld,
         pokemons_backup: action.payload, 
     }
   case GET_TYPES:
@@ -61,7 +65,8 @@ export default function rootReducer(state = initialState, action) {
   case CLEAN_STATE:
     return { 
         ...state,
-        pokemonDetail: action.payload 
+        pokemonDetail: action.payload ,
+        pokemons:action.payload
     }
 
   case SEARCH:

@@ -1,8 +1,13 @@
+body {
+    padding-left: 0;
+}
+
 .container {
     display: flex;
-    direction: column;
+    direction: row;
     align-content: space-around;
     padding-top: 2vw;
+    margin-left: 5px;
 }
 
 .pkContainer {
@@ -23,7 +28,9 @@
     padding-left: 4%;
     padding-top: 4%;
 
-    flex-direction: column-reverse;
+    /* flex-direction: column-reverse; */
+    flex-direction: row;
+    display: flex;
 
 }
 
@@ -31,4 +38,41 @@
     color: rgb(183, 183, 183);
     text-shadow: 0px 4px 10px rgba(9, 9, 9, 0.89);
     -webkit-text-stroke: 0.002px rgb(165, 165, 165);
+}
+
+
+
+.pageButtons {}
+
+.numberLink {
+    margin: 5px;
+    justify-content: space-around;
+
+}
+
+.ulLabel {
+    text-shadow: 0px 4px 10px rgba(9, 9, 9, 0.89);
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    color: rgb(255, 255, 0);
+    flex-direction: row;
+    display: flex;
+    list-style: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+    /* padding-bottom: 0px; */
+
+}
+
+.numberLink:hover {
+    cursor: pointer;
+    color: rgb(226, 147, 1)
+}
+
+
+.numberLink:active {
+    font-size: larger;
+    color: rgb(0, 0, 0)
 }
