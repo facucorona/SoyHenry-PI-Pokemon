@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './styles/Filter.module.css'
-import { getTypes, filterState, resetState, unmountBackup, getPokemons, cleanState } from '../store/actions/index'
+import { getTypes, filterState, resetState, filterStateOrigin, getPokemons, cleanState } from '../store/actions/index'
 
 function Filter() {
     let dispatch = useDispatch();
@@ -28,35 +28,19 @@ function Filter() {
         })
         setFilteredPokemons(filtered)
 
-        // hace backup del estado actual para cuando se vuelva a montar el componente
-        // dispatch(unmountBackup(filtered))
+        // hace backup del estado actual para cuando se vuelva a montar el componente       
     }
     let notFound = true;
-    let total = pokemonsMain;
-    let apiFilterDB = pokemonsMain.filter(p => p.id.length > 8)
-    const apiFilterAPI = pokemonsMain.filter(p => typeof (p.id) === "number")
+
+
     function handleSelectChangeOrigin(e) {
         e.preventDefault();
+        // console.log(e.target.value)
+        let arrayDispatch = []
+        if (filteredPokemons.length !== undefined) { arrayDispatch = filteredPokemons }
+        if (filteredPokemons.length === undefined) { arrayDispatch = pokemonsMain }
 
-
-        if (e.target.value === "") {
-            setFilteredPokemons(total);
-
-        }
-        if (e.target.value === "db") {
-            if (apiFilterDB.length > 0) {
-                setFilteredPokemons(apiFilterDB)
-            }
-            else {
-                notFound = false;
-            }
-        }
-
-        if (e.target.value === "api") {
-
-            setFilteredPokemons(apiFilterAPI)
-            // dispatch(unmountBackup(apiFilterAPI))
-        }
+        dispatch(filterStateOrigin(e.target.value, arrayDispatch))
     }
 
     useEffect(() => {

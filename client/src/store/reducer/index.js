@@ -6,16 +6,19 @@ import {
     GET_TYPES,
     RESET_STATE,
     FILTER_STATE,
+    FILTER_STATE_ORIGIN,
     ORDER_STATE,
     UNMOUNT_BACKUP,
 } from "../actions"
 
 const initialState = {
+    types : [],
+
     pokemons : [],
     pokemons_backup: [],
+    prev : [],
+    
     pokemonDetail : [],
-    types : [],
-    unmountBackup : [],
 
 }
 
@@ -32,23 +35,39 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         pokemons: state.pokemons_backup,        
     }
-  case ORDER_STATE:
+  case ORDER_STATE:    
     return { 
-        ...state,
-        pokemons: action.payload,        
+      ...state,
+      pokemons: action.payload,        
     }
-  case FILTER_STATE:
-    return { 
+    case FILTER_STATE:      
+      return { 
         ...state,        
         pokemons: action.payload 
+    }
+    case FILTER_STATE_ORIGIN:
+      let result=[]
+      console.log("action.payload{{{{{{{{{{{{")
+      console.log(action.payload)
+      
+      state.prev=state.pokemons;
+      if (action.payload.filter===""){result=action.payload.array}
+      
+      if (action.payload.filter==="db"){result=action.payload.array.filter(p => p.id.length > 8)}
+
+      if (action.payload.filter==="api"){result=action.payload.array.filter(p => typeof (p.id) === "number")}
+      console.log("result{{{{{{{{{{{{")
+      console.log(result)
+      return { 
+        ...state,                
+        pokemons: result, 
     }
   case GET_POKEMONS:
     let pyld =[];
     state.pokemons[0]===undefined?pyld=action.payload:pyld=state.pokemons
     
     return { 
-        ...state,
-        
+        ...state,        
         pokemons: pyld,
         pokemons_backup: action.payload, 
     }

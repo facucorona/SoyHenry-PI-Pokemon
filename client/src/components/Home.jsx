@@ -19,18 +19,8 @@ function Home() {
 
     useEffect(() => {
 
-        if (allPokemon[0] === undefined) {
-            dispatch(getPokemons())
-        }
+        dispatch(getPokemons())
     }, [dispatch]);
-
-    // let lastOrder = useSelector(state => state.unmountBackup)
-    // console.log(lastOrder[0])
-    // console.log(allPokemon)
-
-    // if (lastOrder[0] !== undefined) { allPokemon = lastOrder }
-
-
 
     let arrayOfPages = []
     for (let i = 0; i < allPokemon.length; i += 12) {
@@ -54,10 +44,7 @@ function Home() {
         return setPageIndex(aux)
     }
 
-    // let bck = useSelector(state => state.pokemons)
-    // useEffect(() => {
-    //     return dispatch(unmountBackup(bck))
-    // })
+
     return (
         <div className={style.container}>
 
@@ -67,6 +54,7 @@ function Home() {
                 <div className={style.filterOrder}>
                     <Filter />
                     <Order /><br /><br />
+
                     <nav className={style.navPag}>
                         <ul className={style.ulLabel}>
                             {
@@ -83,9 +71,7 @@ function Home() {
                             }
                         </ul>
                     </nav>
-                    {/* {
-                        if(!arrayOfPages[pageIndex]) {return(<div className="error"><Error /></div>) }
-                    } */}
+
                     <small className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</small><br /><br />
                     <input type="button" value="Prev" onClick={e => onCickPrev(e)} />
                     <input type="button" value="Next" onClick={e => onCickNext(e)} />
