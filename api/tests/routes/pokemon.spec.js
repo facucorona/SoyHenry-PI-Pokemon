@@ -6,7 +6,16 @@ const { Pokemon, conn } = require('../../src/db.js');
 
 const agent = session(app);
 const pokemon = {
-  name: 'Pikachu',
+      name: 'Pikachu',
+
+      hp: 20,
+      attack: 23,
+      defense: 22,
+      speed: 45,
+      weight: 65,
+      height: 23,
+      pokemonType: "grass, fire",
+      image: "https://google.com/foto.jpg",
 };
 
 describe('Pokemon routes', () => {
@@ -21,4 +30,11 @@ describe('Pokemon routes', () => {
       agent.get('/pokemons').expect(200)
     );
   });
+  describe('Pokemon POST', ()=>{
+    it('should get 200', (()=>{
+      agent.post('/pokemons').expect(200)
+    }))
+  })
 });
+
+//agregado

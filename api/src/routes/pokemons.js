@@ -24,9 +24,12 @@ router.get("/", async (req, res, next) => {
          }).then(i=>{            
             if (i.name){
               let typesString = "";
-              i.types.forEach((t)=>{
-                  typesString = typesString + t.type.name + ", "
-                  }) 
+              i.types.forEach((t, index)=>{                
+                typesString = typesString + t.type.name + " ~ "
+              }) 
+              i.name = i.name.charAt(0).toUpperCase() + i.name.slice(1)
+              // finalString = typesString.substring(0, typesString.length - 1)
+              
               return({
               pokemonType : typesString,
               hp : i.stats[0].base_stat,
@@ -76,8 +79,13 @@ router.get("/", async (req, res, next) => {
               
               let typesString = "";
               info.types.forEach((t)=>{
-                  typesString = typesString + t.type.name + ", "
+                  typesString = typesString + t.type.name + " ~ "
                   }) 
+                  
+                  info.name = info.name.charAt(0).toUpperCase() + info.name.slice(1)
+                  // typesString = typesString.substring(0, typesString.length - 1)
+    
+              
           return({
               pokemonType : typesString,
               hp : info.stats[0].base_stat,
@@ -96,7 +104,7 @@ router.get("/", async (req, res, next) => {
       })
 
    let fullArray = pokeArrayDb.concat(pokeArrayAPI)         
-   res.send(fullArray)
+   res.status(200).send(fullArray)
 
   } }catch (err) {
     next(err);
@@ -111,8 +119,11 @@ router.get("/:id", async(req, res, next) => {
               
         let typesString = "";
         info.types.forEach((t)=>{
-            typesString = typesString + t.type.name + ", "
+            typesString = typesString + t.type.name + " ~ "
             }) 
+
+        info.name =info.name.charAt(0).toUpperCase() + info.name.slice(1)
+
         return res.send({
             pokemonType : typesString,
             hp : info.stats[0].base_stat,
@@ -127,7 +138,7 @@ router.get("/:id", async(req, res, next) => {
           })
     }else{
        let searchDb = await Pokemon.findAll().then((db)=>{
-         if(db === null || db === undefined){db=[]}
+         if(db === null || db === undefined){ db = [] }
          return db
         }).then((a)=>{
           if(a !== []){
@@ -161,6 +172,8 @@ router.post("/", async (req, res, next) => {
       image,
     } = req.body;
 
+    name = name.charAt(0).toUpperCase() + name.slice(1)
+
     await fetch(`http://localhost:3001/types`);
     let newPokemon = await Pokemon.create({
       name: name,
@@ -183,7 +196,7 @@ router.post("/", async (req, res, next) => {
 
       let relationship = newPokemon.addType(typeSearch);
     });
-    res.send(newPokemon);
+    res.status(200).send(newPokemon);
   } catch (err) {
     next(err);
   }
