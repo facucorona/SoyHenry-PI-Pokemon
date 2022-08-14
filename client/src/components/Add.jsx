@@ -31,6 +31,7 @@ function Add() {
     let [heightAdvert, setHeightAdvert] = useState(true)
     let [imageAdvert, setImageAdvert] = useState(true)
     let [typeAdvert, setTypeAdvert] = useState(false)
+    let [addedTypeAdvert, setAddedTypeAdvert] = useState(true)
     let [globalAdvert, setGlobalAdvert] = useState(true)
 
     function handleChange(e) {
@@ -105,13 +106,18 @@ function Add() {
     function handleSelectChange(e) {
         console.log(document.getElementById("typeSelector").value)
 
+        setAddedTypeAdvert(true)
         let currentValue = document.getElementById("typeSelector").value
         if (currentValue === "") { return selectedTypes }
         if (selectedTypes === []) { setTypeAdvert(false) }
-        if (selectedTypes.includes(currentValue)) { return selectedTypes }
-
-        setTypeAdvert(true)
-        setSelectedTypes([...selectedTypes, document.getElementById("typeSelector").value])
+        if (selectedTypes.includes(currentValue)) {
+            setAddedTypeAdvert(false)
+            return selectedTypes
+        }
+        else {
+            setTypeAdvert(true)
+            setSelectedTypes([...selectedTypes, document.getElementById("typeSelector").value])
+        }
         console.log(newPokemonObject)
 
     }
@@ -193,7 +199,8 @@ function Add() {
                 <small className={style.allow} hidden={heightAdvert}>Only Numbers allowed.</small><br /> <br />
 
                 <label>Select Types:</label> <br />
-                <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onClick={e => handleSelectChange(e)}>
+                <small className={style.allow} hidden={addedTypeAdvert}>Value already chosen.</small><br />
+                <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
                     <option value="">Select Type</option>
                     {
                         typesFetch?.map(type => {

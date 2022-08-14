@@ -1,10 +1,9 @@
 .container {
     display: flex;
     justify-content: space-between;
-    /* background: rgba(255, 255, 1, 1); */
     background: linear-gradient(to right, rgba(255, 255, 1, 1), rgb(255, 247, 0));
     border-radius: 0px;
-    height: 70px;
+    height: 65px;
     width: 100%;
     margin-top: 0px;
     align-content: space-around;
@@ -12,6 +11,9 @@
     border-bottom: 3px solid black;
     position: fixed;
     z-index: 1;
+    width: 100vw;
+
+
 }
 
 .logoHenry {
