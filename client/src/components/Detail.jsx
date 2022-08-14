@@ -29,8 +29,7 @@ export function Detail() {
         objectFetch = detailFetch[0]
         detailFetch = objectFetch
     }
-    // detailFetch.name = detailFetch.name.charAt(0).toUpperCase() + detailFetch.name.slice(1)
-    // detailFetch.pokemonType = detailFetch.pokemonType.substring(0, detailFetch.pokemonType.length - 1)
+
     // console.log(detailFetch)
     let varrr = document.getElementsByName("name")
     // console.log(varrr)

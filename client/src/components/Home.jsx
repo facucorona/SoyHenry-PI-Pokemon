@@ -92,6 +92,10 @@ function Home() {
                                 p.name = p.name.charAt(0).toUpperCase() + p.name.slice(1)
                                 p.pokemonType = p.pokemonType.substring(0, p.pokemonType.length - 1)
                             }
+                            if (p.id.length > 8) {
+
+                                //terminar función 
+                            }
                             return (
                                 <div className={style.cardContainer}>
                                     <NavLink to={`/detail/${p.id}`} className={style.navLink}>
