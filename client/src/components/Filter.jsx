@@ -37,8 +37,8 @@ function Filter() {
         e.preventDefault();
         // console.log(e.target.value)
         let arrayDispatch = []
-        if (filteredPokemons.length !== undefined) { arrayDispatch = filteredPokemons }
-        if (filteredPokemons.length === undefined) { arrayDispatch = pokemonsMain }
+        if (filteredPokemons !== undefined) { arrayDispatch = filteredPokemons }
+        if (filteredPokemons === undefined) { arrayDispatch = pokemonsMain }
 
         dispatch(filterStateOrigin(e.target.value, arrayDispatch))
     }
@@ -69,7 +69,7 @@ function Filter() {
                     })
                 }
             </select><br /><br />
-            <label>Filter by Origin</label>
+            <label>Filter by Origin</label><br />
             <select id={'originSelector'} defaultValue={""} name={"pokemonOrigin"} onChange={e => handleSelectChangeOrigin(e)}>
                 <option value="">Select Origin</option>
                 <option value="db">Created</option>

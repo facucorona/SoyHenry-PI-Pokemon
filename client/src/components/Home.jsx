@@ -88,6 +88,10 @@ function Home() {
 
 
                         arrayOfPages[pageIndex]?.map((p) => {
+                            if (p.id.length < 8) {
+                                p.name = p.name.charAt(0).toUpperCase() + p.name.slice(1)
+                                p.pokemonType = p.pokemonType.substring(0, p.pokemonType.length - 1)
+                            }
                             return (
                                 <div className={style.cardContainer}>
                                     <NavLink to={`/detail/${p.id}`} className={style.navLink}>

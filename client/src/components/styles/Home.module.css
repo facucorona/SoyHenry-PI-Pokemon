@@ -1,5 +1,5 @@
 body {
-    padding-left: 0;
+    padding-left: 0vw;
 }
 
 .container {
@@ -8,6 +8,11 @@ body {
     align-content: space-around;
     padding-top: 2vw;
     margin-left: 5px;
+    /* align-items: center; */
+    align-content: stretch;
+    justify-content: center;
+    /* width: 100%; */
+
 }
 
 .pkContainer {
@@ -21,12 +26,16 @@ body {
     border-radius: 5px;
     align-items: center;
 
+
 }
 
 .navFilterOrder {
     /* backdrop-filter: blur(0.80rem); */
     padding-left: 4%;
+    padding-right: 4%;
     padding-top: 4%;
+    margin-left: 0.1vw;
+    width: 10%;
 
     /* flex-direction: column-reverse; */
     flex-direction: row;
@@ -42,7 +51,7 @@ body {
 
 
 
-.pageButtons {}
+.navPag {}
 
 .numberLink {
     margin: 5px;

@@ -7,7 +7,7 @@ function Card({ name, image, type }) {
         <div className={style.container}>
             <h1>{name}</h1>
             <img className={style.image} src={image} /><br />
-            <h2>{type}</h2>
+            <h2>~ {type}</h2>
 
         </div>
     )

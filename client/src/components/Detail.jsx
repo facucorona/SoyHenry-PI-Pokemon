@@ -16,7 +16,7 @@ export function Detail() {
 
     let bckRestore = useSelector(state => state.unmountBackup)
     useEffect(() => {
-
+        return (dispatch(getDetails(0)))
     }, []);
 
 
@@ -29,20 +29,24 @@ export function Detail() {
         objectFetch = detailFetch[0]
         detailFetch = objectFetch
     }
+    // detailFetch.name = detailFetch.name.charAt(0).toUpperCase() + detailFetch.name.slice(1)
+    // detailFetch.pokemonType = detailFetch.pokemonType.substring(0, detailFetch.pokemonType.length - 1)
     // console.log(detailFetch)
     let varrr = document.getElementsByName("name")
-    console.log(varrr)
+    // console.log(varrr)
 
 
     return (
         <div id="container" className={style.container}>
+            {
 
+            }
             <h1>{detailFetch.name}</h1>
 
             <img src={detailFetch.image} alt="image" /><br />
 
             <h2>Pokemon Type:</h2>
-            <h3>{detailFetch.pokemonType}</h3>
+            <h3> ~ {detailFetch.pokemonType}</h3>
 
             <h2>Pokemon Health Points:</h2>
             <h3>{detailFetch.hp}</h3>
