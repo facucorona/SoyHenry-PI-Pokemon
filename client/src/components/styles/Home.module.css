@@ -33,6 +33,7 @@ body {
     width: 10vw;
     flex-direction: row;
     display: flex;
+    text-shadow: 1px 1px 10px rgb(255, 36, 36);
 }
 
 .divPaginationText {

@@ -69,6 +69,9 @@ export function Detail() {
             <h2>Height:</h2>
             <h3>{detailFetch.height}</h3>
 
+            <h2>Pokémon ID:</h2>
+            <h3>{detailFetch.id}</h3>
+
             <NavLink to="/home">
                 <input type="button" value="Back" />
             </NavLink>
