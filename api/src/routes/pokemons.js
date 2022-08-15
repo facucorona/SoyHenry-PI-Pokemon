@@ -66,12 +66,8 @@ router.get("/", async (req, res, next) => {
             })
             return newSearch
           })
-
-        let fullArray = searchDb.concat(searchApi).filter(el => el != null)
-
-        
+        let fullArray = searchDb.concat(searchApi).filter(el => el != null)        
         res.send(fullArray);
-
     } else {
       let pokeArrayDb = await Pokemon.findAll({include: Type})    
       pokeArrayDb.forEach((p)=>{
@@ -82,7 +78,7 @@ router.get("/", async (req, res, next) => {
               p.pokemonType= string
       })                 
 
-      let pokeArrayAPI = await fetch("https://pokeapi.co/api/v2/pokemon?offset=00&limit=40")
+      let pokeArrayAPI = await fetch("https://pokeapi.co/api/v2/pokemon?offset=00&limit=150")
       .then((resp) => resp.json())
       .then((array)=>{
         
@@ -95,11 +91,8 @@ router.get("/", async (req, res, next) => {
               let typesString = "";
               info.types.forEach((t)=>{
                   typesString = typesString + t.type.name + " ~ "
-                  }) 
-                  
-                  info.name = info.name.charAt(0).toUpperCase() + info.name.slice(1)
-                  // typesString = typesString.substring(0, typesString.length - 1)
-    
+                  })                   
+                  info.name = info.name.charAt(0).toUpperCase() + info.name.slice(1)                 
               
           return({
               pokemonType : typesString,
