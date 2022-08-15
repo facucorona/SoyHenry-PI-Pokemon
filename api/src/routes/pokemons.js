@@ -122,7 +122,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async(req, res, next) => {
   try {
    let id = req.params.id;
-   console.log(id)
+  //  console.log(id)
     if (id.length < 5){ let info = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(i=>i.json());
               
         let typesString = "";
