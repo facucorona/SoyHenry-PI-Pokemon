@@ -40,10 +40,7 @@ export function Detail() {
 
     return (
         <div id="container" className={style.container}>
-            {
-                // formatType(detailFetch)
 
-            }
             <h1>{detailFetch.name}</h1>
 
             <img src={detailFetch.image} alt="image" /><br />
@@ -53,6 +50,7 @@ export function Detail() {
 
             <h2>Pokemon Health Points:</h2>
             <h3>{detailFetch.hp}</h3>
+            {/* <progress>{detailFetch.hp}</progress> */}
 
             <h2>Attack:</h2>
             <h3>{detailFetch.attack}</h3>
