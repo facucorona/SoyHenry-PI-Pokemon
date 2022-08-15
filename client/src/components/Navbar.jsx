@@ -17,7 +17,7 @@ function Navbar() {
     function onChangeSearch(e) {
         e.preventDefault();
         setSearchState(e.target.value)
-        console.log(searchState)
+        // console.log(searchState)
     }
 
     return (
