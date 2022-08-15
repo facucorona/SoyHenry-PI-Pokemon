@@ -93,8 +93,13 @@ function Home() {
                                 p.pokemonType = p.pokemonType.substring(0, p.pokemonType.length - 1)
                             }
                             if (p.id.length > 8) {
-
-                                //terminar función 
+                                let string = ""
+                                let array = p.pokemonType.split(',')
+                                array.forEach(t => {
+                                    string = string + t + " ~ "
+                                })
+                                string = string.substring(0, p.pokemonType.length - 1)
+                                p.pokemonType = string;
                             }
                             return (
                                 <div className={style.cardContainer}>

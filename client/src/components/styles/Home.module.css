@@ -9,41 +9,30 @@ body {
     padding-top: 2vw;
     margin-left: 0px;
     margin-right: 0px;
-    /* align-items: center; */
-    /* align-content: stretch; */
     justify-content: center;
     width: 100vw;
-
-
 }
 
 .pkContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     gap: 1rem;
     padding: 3rem;
     justify-content: space-around;
     border-radius: 5px;
     align-items: center;
-
-
 }
 
 .navFilterOrder {
-    /* backdrop-filter: blur(0.80rem); */
     padding-left: 4%;
     padding-right: 4%;
     padding-top: 4%;
     margin-left: 0.1vw;
     width: 10%;
     width: 10vw;
-
-    /* flex-direction: column-reverse; */
     flex-direction: row;
     display: flex;
-
 }
 
 .divPaginationText {
@@ -70,8 +59,6 @@ body {
     margin-left: 0px;
     padding-left: 0px;
     margin-bottom: 0px;
-    /* padding-bottom: 0px; */
-
 }
 
 .numberLink:hover {
