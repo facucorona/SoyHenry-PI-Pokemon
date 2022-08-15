@@ -16,6 +16,21 @@ function Home() {
 
 
     let allPokemon = useSelector(state => state.pokemons)
+    // allPokemon.forEach((p) => {
+    //     let string
+
+
+
+
+    //     if (p.id.length > 8) {
+    //         let array = p.pokemonType.split(',')
+    //         array.forEach(t => {
+    //             string = string + t + " ~ ")
+    //         return string
+    //     }
+    //     return p.pokemonType;
+
+    // })
 
     useEffect(() => {
 
@@ -92,18 +107,22 @@ function Home() {
                                 p.name = p.name.charAt(0).toUpperCase() + p.name.slice(1)
                                 p.pokemonType = p.pokemonType.substring(0, p.pokemonType.length - 1)
                             }
+                            let string = ""
                             if (p.id.length > 8) {
-                                let string = ""
                                 let array = p.pokemonType.split(',')
                                 array.forEach(t => {
                                     string = string + t + " ~ "
                                 })
-                                string = string.substring(0, p.pokemonType.length - 1)
-                                p.pokemonType = string;
+                                // string = string.substring(0, p.pokemonType.length - 1)
+
+
                             }
                             return (
                                 <div className={style.cardContainer}>
                                     <NavLink to={`/detail/${p.id}`} className={style.navLink}>
+                                        {
+
+                                        }
                                         <Card key={p.id} name={p.name} image={p.image} type={p.pokemonType} />
                                     </NavLink>
                                 </div>

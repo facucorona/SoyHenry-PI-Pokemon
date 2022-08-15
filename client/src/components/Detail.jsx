@@ -4,6 +4,7 @@ import { NavLink, useParams } from 'react-router-dom'
 import style from './styles/Detail.module.css'
 import { Card } from './Card'
 import { getDetails, cleanState, filterState } from '../store/actions/index'
+import Error from './Error'
 
 export function Detail() {
     let { id } = useParams()
@@ -31,13 +32,16 @@ export function Detail() {
     }
 
     // console.log(detailFetch)
-    let varrr = document.getElementsByName("name")
+    // let varrr = document.getElementsByName("name")
     // console.log(varrr)
+
+
 
 
     return (
         <div id="container" className={style.container}>
             {
+                // formatType(detailFetch)
 
             }
             <h1>{detailFetch.name}</h1>
