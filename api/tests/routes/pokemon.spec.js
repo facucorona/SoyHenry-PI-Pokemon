@@ -20,20 +20,31 @@ const pokemon = {
 
 describe('Pokemon routes', () => {
   before(() => conn.authenticate()
-  .catch((err) => {
+
+  .catch((err) => {    
     console.error('Unable to connect to the database:', err);
   }));
+
   beforeEach(() => Pokemon.sync({ force: true })
     .then(() => Pokemon.create(pokemon)));
-  describe('GET /pokemons', () => {
+  
+    describe('GET /pokemons', () => {
     it('should get 200', () =>
       agent.get('/pokemons').expect(200)
     );
   });
+
   describe('Pokemon POST', ()=>{
     it('should get 200', (()=>{
       agent.post('/pokemons').expect(200)
     }))
+    it('responds with an object of the  POST', ()=>{
+      agent.post('/pokemons')
+      .send(pokemon)
+      .then((res)=>{
+        expect(res.body).lessThanOrEqual(pokemon);
+      })
+    })
   })
 });
 

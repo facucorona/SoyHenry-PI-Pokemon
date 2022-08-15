@@ -52,8 +52,16 @@ router.get("/", async (req, res, next) => {
             if(db === null || db === undefined){db=[]}
             return db
           }).then((a)=>{
-            let newSearch = a.map((a)=>{      
-            if (a.name.toLowerCase() === name.toLowerCase()){return a}
+            let newSearch = a.map((a)=>{     
+              
+              let string = "";
+              let array = a.pokemonType.split(',')
+              array.forEach(t => {
+                string = string + t + " ~ "})
+              a.pokemonType= string
+            
+            
+              if (a.name.toLowerCase() === name.toLowerCase()){return a}
             return undefined
             })
             return newSearch
@@ -65,7 +73,14 @@ router.get("/", async (req, res, next) => {
         res.send(fullArray);
 
     } else {
-      let pokeArrayDb = await Pokemon.findAll({include: Type})                     
+      let pokeArrayDb = await Pokemon.findAll({include: Type})    
+      pokeArrayDb.forEach((p)=>{
+        let string = "";
+              let array = p.pokemonType.split(',')
+              array.forEach(t => {
+                string = string + t + " ~ "})
+              p.pokemonType= string
+      })                 
 
       let pokeArrayAPI = await fetch("https://pokeapi.co/api/v2/pokemon?offset=00&limit=40")
       .then((resp) => resp.json())
@@ -115,7 +130,7 @@ router.get("/:id", async(req, res, next) => {
   try {
    let id = req.params.id;
    console.log(id)
-   if (id.length < 5){ let info = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(i=>i.json());
+    if (id.length < 5){ let info = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(i=>i.json());
               
         let typesString = "";
         info.types.forEach((t)=>{
@@ -144,7 +159,17 @@ router.get("/:id", async(req, res, next) => {
           if(a !== []){
               // console.log(a)
               let newSearch = a.map((a)=>{      
-                  if (a.id === id){return a}
+                  if (a.id === id){
+                    //formater pokemonType
+                     let string = ""
+                                let array = a.pokemonType.split(',')
+                                array.forEach(t => {
+                                    string = string + t + " ~ "
+                                })
+                                // string = string.substring(0, a.pokemonType.length - 1)
+                                a.pokemonType = string;
+                    return a
+                  }
                   return undefined
               })
               return newSearch
@@ -173,6 +198,9 @@ router.post("/", async (req, res, next) => {
     } = req.body;
 
     name = name.charAt(0).toUpperCase() + name.slice(1)
+
+    const exist = await Pokemon.findOne({ where: { name: name } });
+    if (exist) return res.status(300).json({ info:  `${name} already Exists in DB` });
 
     await fetch(`http://localhost:3001/types`);
     let newPokemon = await Pokemon.create({
