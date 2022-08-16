@@ -78,7 +78,7 @@ router.get("/", async (req, res, next) => {
               p.pokemonType= string
       })                 
 
-      let pokeArrayAPI = await fetch("https://pokeapi.co/api/v2/pokemon?offset=00&limit=150")
+      let pokeArrayAPI = await fetch("https://pokeapi.co/api/v2/pokemon?offset=00&limit=40")
       .then((resp) => resp.json())
       .then((array)=>{
         
