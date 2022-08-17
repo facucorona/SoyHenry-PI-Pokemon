@@ -27,4 +27,5 @@
 .container:hover {
     width: 430px;
     height: 530px;
+    transition: 0.2s;
 }

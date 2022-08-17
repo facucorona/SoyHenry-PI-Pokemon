@@ -22,16 +22,16 @@ function Add() {
     let regExpUrl = RegExp(/^(https?:\/\/.*\.(?:jpg|jpeg|gif))$/)
 
 
-    let [nameAdvert, setNameAdvert] = useState(true)
-    let [hpAdvert, setHpAdvert] = useState(true)
-    let [defenseAdvert, setDefenseAdvert] = useState(true)
-    let [attackAdvert, setAttackAdvert] = useState(true)
-    let [speedAdvert, setSpeedAdvert] = useState(true)
-    let [weightAdvert, setWeightAdvert] = useState(true)
-    let [heightAdvert, setHeightAdvert] = useState(true)
-    let [imageAdvert, setImageAdvert] = useState(true)
+    let [nameAdvert, setNameAdvert] = useState(false)
+    let [hpAdvert, setHpAdvert] = useState(false)
+    let [defenseAdvert, setDefenseAdvert] = useState(false)
+    let [attackAdvert, setAttackAdvert] = useState(false)
+    let [speedAdvert, setSpeedAdvert] = useState(false)
+    let [weightAdvert, setWeightAdvert] = useState(false)
+    let [heightAdvert, setHeightAdvert] = useState(false)
+    let [imageAdvert, setImageAdvert] = useState(false)
     let [typeAdvert, setTypeAdvert] = useState(false)
-    let [addedTypeAdvert, setAddedTypeAdvert] = useState(true)
+    let [addedTypeAdvert, setAddedTypeAdvert] = useState(false)
     let [globalAdvert, setGlobalAdvert] = useState(true)
 
     function handleChange(e) {
@@ -96,15 +96,16 @@ function Add() {
             else {
                 setImageAdvert(true);
                 setNewPokemonObject({ ...newPokemonObject, [e.target.name]: e.target.value })
-                console.log(newPokemonObject)
+                // console.log(newPokemonObject)
 
             }
         }
         setNewPokemonObject({ ...newPokemonObject, [e.target.name]: e.target.value })
+        setGlobalAdvert(true)
     }
 
     function handleSelectChange(e) {
-        console.log(document.getElementById("typeSelector").value)
+        // console.log(document.getElementById("typeSelector").value)
 
         setAddedTypeAdvert(true)
         let currentValue = document.getElementById("typeSelector").value
@@ -118,18 +119,19 @@ function Add() {
             setTypeAdvert(true)
             setSelectedTypes([...selectedTypes, document.getElementById("typeSelector").value])
         }
-        console.log(newPokemonObject)
+        // console.log(newPokemonObject)
 
     }
     let [createdOk, setCreatedOk] = useState(true)
     let [addedTypes, setAddedTypes] = useState(true)
+
     async function onSubmit(e) {
         e.preventDefault();
+        setGlobalAdvert(true)
         if (nameAdvert === false || hpAdvert === false || defenseAdvert === false || attackAdvert === false || speedAdvert === false || weightAdvert === false || heightAdvert === false || imageAdvert === false || typeAdvert === false) {
             setGlobalAdvert(false)
             return
         } else {
-
 
             setGlobalAdvert(true)
             await fetch('http://localhost:3001/pokemons/', {
@@ -164,6 +166,11 @@ function Add() {
 
     }
 
+    // function cleanStateOnLeave(e) {
+    //     e.preventDefault();
+    //     dispatch(cleanState())
+    // }
+
     return (
         <div className={style.container}>
             <h1>New Pokemon on Pokedex</h1>
@@ -176,27 +183,27 @@ function Add() {
 
                 <label>Health Points </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Health Points" min="0" name="hp" /><br />
-                <small className={style.allow} hidden={hpAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={hpAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Defense </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Defense" min="0" name="defense" /><br />
-                <small className={style.allow} hidden={defenseAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={defenseAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Attack </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Attack" min="0" name="attack" /><br />
-                <small className={style.allow} hidden={attackAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={attackAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Speed </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Speed" min="0" name="speed" /><br />
-                <small className={style.allow} hidden={speedAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={speedAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Weight </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Weight" min="0" name="weight" /><br />
-                <small className={style.allow} hidden={weightAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={weightAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Height </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder="Height" min="0" name="height" /><br />
-                <small className={style.allow} hidden={heightAdvert}>Only Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={heightAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Select Types:</label> <br />
                 <small className={style.allow} hidden={addedTypeAdvert}>Value already chosen.</small><br />
@@ -205,7 +212,7 @@ function Add() {
                     {
                         typesFetch?.map(type => {
                             return (
-                                <option name={type} value={type}>{type}</option>
+                                <option key={type} name={type} value={type}>{type}</option>
                             )
                         })
                     }

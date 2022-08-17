@@ -6,7 +6,7 @@ export function Landing() {
     return (
         <div key={"landingContainer"} className={style.container}>
             <NavLink to={'/home'}>
-                <button title={"enter button"} className={style.button}>enter Pokédex</button>
+                <button title={"enter button"} className={style.button}>Enter Pokédex</button>
             </NavLink>
             <h6 className={style.press}>press the button</h6>
         </div >

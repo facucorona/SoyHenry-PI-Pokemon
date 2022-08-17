@@ -31,14 +31,14 @@ function Navbar() {
             </div>
 
             <form onSubmit={onSubmitSearch} className={style.searchForm}>
-                <input type="text" placeholder="Search Pokemon" onChange={onChangeSearch} value={searchState} />
+                <input type="text" placeholder="Search Pokémon" onChange={onChangeSearch} value={searchState} />
                 <input type="submit" value="Go!" /><br />
                 <small >Empty Search for All Pokémon</small><br /><br />
             </form>
 
 
             <NavLink to="/add" className={style.addButton}>
-                <input className={style.button} type="button" value="New Pokemon" /><br />
+                <input className={style.button} type="button" value="New Pokémon" /><br />
             </NavLink>
 
         </div>

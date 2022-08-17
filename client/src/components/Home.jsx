@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import style from './styles/Home.module.css'
-import { getPokemons, resetState, unmountBackup, filterState } from '../store/actions/index'
+import { getPokemons } from '../store/actions/index'
 import Card from './Card'
 import Filter from './Filter'
 import Order from './Order'
@@ -13,27 +13,9 @@ function Home() {
 
 
     let dispatch = useDispatch();
-
-
     let allPokemon = useSelector(state => state.pokemons)
-    // allPokemon.forEach((p) => {
-    //     let string
-
-
-
-
-    //     if (p.id.length > 8) {
-    //         let array = p.pokemonType.split(',')
-    //         array.forEach(t => {
-    //             string = string + t + " ~ ")
-    //         return string
-    //     }
-    //     return p.pokemonType;
-
-    // })
 
     useEffect(() => {
-
         dispatch(getPokemons())
     }, [dispatch]);
 
@@ -59,13 +41,9 @@ function Home() {
         return setPageIndex(aux)
     }
 
-
     return (
         <div className={style.container}>
-
             <nav className={style.navFilterOrder}>
-
-                {/* <h2>Home</h2> */}
                 <div className={style.filterOrder}>
                     <Filter />
                     <Order /><br /><br />
@@ -74,13 +52,10 @@ function Home() {
                         <ul className={style.ulLabel}>
                             {
                                 arrayOfPages.map((page, index) => {
-
                                     return (
-
                                         <li className="pageButtons" key={index}>
-                                            <a className={style.numberLink} onClick={() => setPageIndex(index)}>{index + 1} </a>
+                                            <p className={style.numberLink} onClick={() => setPageIndex(index)}>{index + 1} </p>
                                         </li>
-
                                     )
                                 })
                             }
@@ -99,38 +74,30 @@ function Home() {
                         <div className="error">
                             <Error />
                         </div>
-                    ) :
+                    ) : arrayOfPages[pageIndex]?.map((p) => {
+                        if (p.id.length < 8) {
+                            p.name = p.name.charAt(0).toUpperCase() + p.name.slice(1)
+                            p.pokemonType = p.pokemonType.substring(0, p.pokemonType.length - 1)
+                        }
+                        let string = ""
+                        if (p.id.length > 8) {
+                            let array = p.pokemonType.split(',')
+                            array.forEach(t => {
+                                string = string + t + " ~ "
+                            })
+                        }
+                        return (
 
+                            <div key={p.id} className={style.cardContainer}>
+                                <NavLink to={`/detail/${p.id}`} className={style.navLink}>
+                                    <Card key={p.id} name={p.name} image={p.image} type={p.pokemonType} />
+                                </NavLink>
+                            </div>
 
-                        arrayOfPages[pageIndex]?.map((p) => {
-                            if (p.id.length < 8) {
-                                p.name = p.name.charAt(0).toUpperCase() + p.name.slice(1)
-                                p.pokemonType = p.pokemonType.substring(0, p.pokemonType.length - 1)
-                            }
-                            let string = ""
-                            if (p.id.length > 8) {
-                                let array = p.pokemonType.split(',')
-                                array.forEach(t => {
-                                    string = string + t + " ~ "
-                                })
-                                // string = string.substring(0, p.pokemonType.length - 1)
-
-
-                            }
-                            return (
-                                <div className={style.cardContainer}>
-                                    <NavLink to={`/detail/${p.id}`} className={style.navLink}>
-                                        {
-
-                                        }
-                                        <Card key={p.id} name={p.name} image={p.image} type={p.pokemonType} />
-                                    </NavLink>
-                                </div>
-                            )
-                        })
+                        )
+                    })
                 }
             </ul>
-
         </div >
     )
 }

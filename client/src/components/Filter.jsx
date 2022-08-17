@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './styles/Filter.module.css'
-import { getTypes, filterState, resetState, filterStateOrigin, getPokemons, cleanState } from '../store/actions/index'
+import { getTypes, filterState, filterStateOrigin, getPokemons, cleanState } from '../store/actions/index'
 
 function Filter() {
     let dispatch = useDispatch();
@@ -64,14 +64,14 @@ function Filter() {
                 {
                     typesFetch?.map(type => {
                         return (
-                            <option name={type} value={type}>{type}</option>
+                            <option key={type} name={type} value={type}>{type}</option>
                         )
                     })
                 }
             </select><br /><br />
             <label>Filter by Origin</label><br />
             <select id={'originSelector'} defaultValue={""} name={"pokemonOrigin"} onChange={e => handleSelectChangeOrigin(e)}>
-                <option value="">Select Origin</option>
+                <option value="">~ All ~</option>
                 <option value="db">Created</option>
                 <option value="api">Existing</option>
             </select><br /><br />

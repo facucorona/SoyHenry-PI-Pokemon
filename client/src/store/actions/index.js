@@ -29,7 +29,7 @@ export function resetState(resetArray){
 }
 
 export function filterState(filteredArray){
-    console.log(filteredArray)
+    // console.log(filteredArray)
     return async (dispatch) => {
         dispatch({
             type: FILTER_STATE,
@@ -39,7 +39,7 @@ export function filterState(filteredArray){
 }
 
 export function filterStateOrigin(filter, array){
-    console.log(filter)
+    // console.log(filter)
     return async (dispatch) => {
         dispatch({
             type: FILTER_STATE_ORIGIN,
@@ -49,8 +49,8 @@ export function filterStateOrigin(filter, array){
 }
 
 export function orderState(orderedArray){
-    console.log("orderedArray .,.,.,.,.,.,.,.,.")
-    console.log(orderedArray)
+    // console.log("orderedArray .,.,.,.,.,.,.,.,.")
+    // console.log(orderedArray)
     return async (dispatch) => {
         dispatch({
             type: ORDER_STATE,

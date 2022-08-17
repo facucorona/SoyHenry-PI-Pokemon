@@ -1,10 +1,9 @@
-import { React, useState, useEffect } from 'react'
+import { React, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import style from './styles/Detail.module.css'
-import { Card } from './Card'
-import { getDetails, cleanState, filterState } from '../store/actions/index'
-import Error from './Error'
+import { getDetails } from '../store/actions/index'
+
 
 export function Detail() {
     let { id } = useParams()
@@ -15,11 +14,9 @@ export function Detail() {
         dispatch(getDetails(id))
     }, [dispatch, id]);
 
-    let bckRestore = useSelector(state => state.unmountBackup)
     useEffect(() => {
         return (dispatch(getDetails(0)))
-    }, []);
-
+    }, [dispatch]);
 
 
     let detailFetch = useSelector(state => state.pokemonDetail)
@@ -31,19 +28,12 @@ export function Detail() {
         detailFetch = objectFetch
     }
 
-    // console.log(detailFetch)
-    // let varrr = document.getElementsByName("name")
-    // console.log(varrr)
-
-
-
-
     return (
         <div id="container" className={style.container}>
 
             <h1>{detailFetch.name}</h1>
 
-            <img src={detailFetch.image} alt="image" /><br />
+            <img src={detailFetch.image} alt="detailImage" /><br />
 
             <h2>Pokemon Type:</h2>
             <h3> ~ {detailFetch.pokemonType}</h3>
@@ -67,7 +57,7 @@ export function Detail() {
             <h2>Height:</h2>
             <h3>{detailFetch.height}</h3>
 
-            <h2>Pokémon ID:</h2>
+            <h2>Pokédex ID:</h2>
             <h3>{detailFetch.id}</h3>
 
             <NavLink to="/home">

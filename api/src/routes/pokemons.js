@@ -86,25 +86,25 @@ router.get("/", async (req, res, next) => {
         return Promise.all(array.map(async(pk)=>{
           if (pk.url){
             
-              let info = await fetch(pk.url).then(i=>i.json());
+                     let info = await fetch(pk.url).then(i=>i.json());
               
               let typesString = "";
               info.types.forEach((t)=>{
-                  typesString = typesString + t.type.name + " ~ "
+                    typesString = typesString + t.type.name + " ~ "
                   })                   
-                  info.name = info.name.charAt(0).toUpperCase() + info.name.slice(1)                 
+                    info.name = info.name.charAt(0).toUpperCase() + info.name.slice(1)                 
               
           return({
               pokemonType : typesString,
-              hp : info.stats[0].base_stat,
-              defense : info.stats[2].base_stat,
-              attack : info.stats[1].base_stat,
-              speed : info.stats[5].base_stat,
-              weight : info.weight,
-              height : info.height,
-              image : info.sprites.other.dream_world.front_default,
-              name : info.name,
-              id : info.id,
+                       hp : info.stats[0].base_stat,
+                  defense : info.stats[2].base_stat,
+                   attack : info.stats[1].base_stat,
+                    speed : info.stats[5].base_stat,
+                   weight : info.weight,
+                   height : info.height,
+                    image : info.sprites.other.dream_world.front_default,
+                     name : info.name,
+                       id : info.id,
             })
           }
           return pk;

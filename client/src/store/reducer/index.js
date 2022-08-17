@@ -24,12 +24,7 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-
-  case UNMOUNT_BACKUP:
-    return { 
-        ...state,
-        unmountBackup: action.payload,        
-    }
+  
   case RESET_STATE:
     return { 
         ...state,
@@ -47,8 +42,8 @@ export default function rootReducer(state = initialState, action) {
     }
     case FILTER_STATE_ORIGIN:
       let result=[]
-      console.log("action.payload{{{{{{{{{{{{")
-      console.log(action.payload)
+      // console.log("action.payload{{{{{{{{{{{{")
+      // console.log(action.payload)
       
       state.prev=state.pokemons;
       if (action.payload.filter===""){result=action.payload.array}
@@ -56,14 +51,15 @@ export default function rootReducer(state = initialState, action) {
       if (action.payload.filter==="db"){result=action.payload.array.filter(p => p.id.length > 8)}
 
       if (action.payload.filter==="api"){result=action.payload.array.filter(p => typeof (p.id) === "number")}
-      console.log("result{{{{{{{{{{{{")
-      console.log(result)
+      // console.log("result{{{{{{{{{{{{")
+      // console.log(result)
       return { 
         ...state,                
         pokemons: result, 
     }
   case GET_POKEMONS:
     let pyld =[];
+    
     state.pokemons[0]===undefined?pyld=action.payload:pyld=state.pokemons
     
     return { 
@@ -89,7 +85,7 @@ export default function rootReducer(state = initialState, action) {
     }
 
   case SEARCH:
-    console.log(action.payload)
+    // console.log(action.payload)
     return { 
         ...state,
         pokemons_backup: state.pokemons,
