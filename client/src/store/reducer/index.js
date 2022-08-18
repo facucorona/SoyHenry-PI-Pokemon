@@ -7,8 +7,7 @@ import {
     RESET_STATE,
     FILTER_STATE,
     FILTER_STATE_ORIGIN,
-    ORDER_STATE,
-    UNMOUNT_BACKUP,
+    ORDER_STATE,    
 } from "../actions"
 
 const initialState = {
@@ -58,8 +57,8 @@ export default function rootReducer(state = initialState, action) {
         pokemons: result, 
     }
   case GET_POKEMONS:
-    let pyld =[];
-    
+
+    let pyld =[];    
     state.pokemons[0]===undefined?pyld=action.payload:pyld=state.pokemons
     
     return { 

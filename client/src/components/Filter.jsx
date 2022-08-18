@@ -9,7 +9,7 @@ function Filter() {
         dispatch(getTypes())
     }, [dispatch])
 
-    let disabledReset = true;
+
     let typesFetch = useSelector(state => state.types)
     typesFetch.sort()
     let pokemonsState = useSelector(state => state.pokemons_backup)
@@ -21,6 +21,7 @@ function Filter() {
     let filtered = []
     function handleSelectChange(e) {
         e.preventDefault();
+        document.getElementById("originSelector").value = "";
         pokemonsState.forEach(p => {
             if (p.pokemonType.includes(e.target.value)) {
                 filtered.push(p)
@@ -40,6 +41,7 @@ function Filter() {
         if (filteredPokemons !== undefined) { arrayDispatch = filteredPokemons }
         if (filteredPokemons === undefined) { arrayDispatch = pokemonsMain }
 
+
         dispatch(filterStateOrigin(e.target.value, arrayDispatch))
     }
 
@@ -51,7 +53,6 @@ function Filter() {
         document.getElementById("typeSelector").value = "";
         document.getElementById("originSelector").value = "";
         setFilteredPokemons(backupState)
-        // dispatch(unmountBackup([]))
         dispatch(cleanState())
         dispatch(getPokemons())
     }
@@ -77,11 +78,11 @@ function Filter() {
             </select><br /><br />
             <label hidden={notFound}>Not Found</label><br /><br />
 
-            {
+            {/* {
                 //boton reset apagado, si se selecciona un filtro se activa
                 (filteredPokemons !== undefined) ? (disabledReset = false)
                     : (disabledReset)
-            }
+            } */}
             <button onClick={onClickReset}>Reset</button><br /><br /><br />
         </div>
     )

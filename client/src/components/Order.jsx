@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { orderState, getPokemons } from '../store/actions/index'
+import { orderState } from '../store/actions/index'
 import style from './styles/Order.module.css'
 
 function Order() {
@@ -54,7 +54,6 @@ function Order() {
                 }
             })
         }
-        console.log(orderedPokedex)
 
         //hacer funcion para ordenar por id, para opc. "not"
 

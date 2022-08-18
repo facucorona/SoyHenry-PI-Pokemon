@@ -31,7 +31,7 @@ function Add() {
     let [heightAdvert, setHeightAdvert] = useState(false)
     let [imageAdvert, setImageAdvert] = useState(false)
     let [typeAdvert, setTypeAdvert] = useState(false)
-    let [addedTypeAdvert, setAddedTypeAdvert] = useState(false)
+    let [addedTypeAdvert, setAddedTypeAdvert] = useState(true)
     let [globalAdvert, setGlobalAdvert] = useState(true)
 
     function handleChange(e) {
@@ -111,6 +111,7 @@ function Add() {
         let currentValue = document.getElementById("typeSelector").value
         if (currentValue === "") { return selectedTypes }
         if (selectedTypes === []) { setTypeAdvert(false) }
+        if ((selectedTypes.length + 1) === 3) { return setTypeAdvert(false) }
         if (selectedTypes.includes(currentValue)) {
             setAddedTypeAdvert(false)
             return selectedTypes
@@ -166,10 +167,7 @@ function Add() {
 
     }
 
-    // function cleanStateOnLeave(e) {
-    //     e.preventDefault();
-    //     dispatch(cleanState())
-    // }
+
 
     return (
         <div className={style.container}>
@@ -218,9 +216,9 @@ function Add() {
                     }
                 </select><br />
                 <input type="button" value="Ok! Add Types" onClick={e => addTypes(e)} /><br />
-                <small className={style.allow} hidden={typeAdvert}>Select at least One type.</small><br />
+                <small className={style.allow} hidden={typeAdvert}>Select 1 or 2 types.</small><br />
 
-                <h3>{selectedTypes.map(t => <div onClick={onClickType} id={t} value={t}>{t}</div>)}</h3>
+                <h3>{selectedTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>)}</h3>
                 <success className={style.created} hidden={addedTypes}>Type/s added!</success> <br />
 
                 <label>Picture URL </label> <br />
