@@ -2,7 +2,7 @@ import { React, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import style from './styles/Detail.module.css'
-import { getDetails } from '../store/actions/index'
+import { getDetails, cleanDetails } from '../store/actions/index'
 
 
 export function Detail() {
@@ -15,7 +15,7 @@ export function Detail() {
     }, [dispatch, id]);
 
     useEffect(() => {
-        return (dispatch(getDetails(0)))
+        return (dispatch(cleanDetails()))
     }, [dispatch]);
 
 

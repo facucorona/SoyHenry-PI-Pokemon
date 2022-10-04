@@ -8,7 +8,8 @@ import {
     FILTER_STATE,
     FILTER_STATE_ORIGIN,
     ORDER_STATE,
-    SET_PAGE_FALSE,    
+    SET_PAGE_FALSE,  
+    CLEAN_DETAILS,  
 } from "../actions"
 
 const initialState = {
@@ -30,21 +31,21 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         pokemons: state.pokemons_backup,        
     }
-  case ORDER_STATE:    
+    case ORDER_STATE:    
     return { 
       ...state,
       pokemons: action.payload,        
     }
     case FILTER_STATE:      
-      return { 
-        ...state,        
-        pokemons: action.payload, 
-        page:true,
+    return { 
+      ...state,        
+      pokemons: action.payload, 
+      page:true,
     }
     case SET_PAGE_FALSE:      
-      return { 
-        ...state,                
-        page:action.payload,
+    return { 
+      ...state,                
+      page:action.payload,
     }
     case FILTER_STATE_ORIGIN:
       let result=[]
@@ -55,7 +56,7 @@ export default function rootReducer(state = initialState, action) {
       if (action.payload.filter===""){result=action.payload.array}
       
       if (action.payload.filter==="db"){result=action.payload.array.filter(p => p.id.length > 8)}
-
+      
       if (action.payload.filter==="api"){result=action.payload.array.filter(p => typeof (p.id) === "number")}
       // console.log("result{{{{{{{{{{{{")
       // console.log(result)
@@ -63,10 +64,10 @@ export default function rootReducer(state = initialState, action) {
         ...state,                
         pokemons: result, 
         page:true,
-    }
-  case GET_POKEMONS:
-
-    let pyld =[];    
+      }
+      case GET_POKEMONS:
+        
+        let pyld =[];    
     state.pokemons[0]===undefined?pyld=action.payload:pyld=state.pokemons
     
     return { 
@@ -84,12 +85,17 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         pokemonDetail: action.payload 
     }
+    case CLEAN_DETAILS:
+      return { 
+          ...state,
+          pokemonDetail: [],        
+      }
   case CLEAN_STATE:
     return { 
         ...state,
         pokemonDetail: action.payload ,
         pokemons:action.payload
-    }
+      }
 
   case SEARCH:
     // console.log(action.payload)

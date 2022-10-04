@@ -9,6 +9,7 @@ export const FILTER_STATE_ORIGIN = "FILTER_STATE_ORIGIN";
 export const ORDER_STATE = "ORDER_STATE";
 export const UNMOUNT_BACKUP = "UNMOUNT_BACKUP";
 export const SET_PAGE_FALSE = "SET_PAGE_FALSE";
+export const CLEAN_DETAILS = "CLEAN_DETAILS";
 
 
 export function unmountBackup(backupArray){
@@ -111,6 +112,14 @@ export function getDetails(id){
 
         })
         
+    }
+}
+export function cleanDetails(){
+    return (dispatch)=>{
+        dispatch({
+            type: CLEAN_DETAILS,
+            payload: [],
+        })
     }
 }
 
