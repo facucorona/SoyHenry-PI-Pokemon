@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './styles/Filter.module.css'
-import { getTypes, filterState, filterStateOrigin, getPokemons, cleanState } from '../store/actions/index'
+import { getTypes, filterState, filterStateOrigin, getPokemons, cleanState, setPageFalse } from '../store/actions/index'
 
 function Filter() {
     let dispatch = useDispatch();
@@ -46,7 +46,10 @@ function Filter() {
     }
 
     useEffect(() => {
-        if (filteredPokemons !== undefined) { dispatch(filterState(filteredPokemons)) }
+        if (filteredPokemons !== undefined) {
+            dispatch(filterState(filteredPokemons))
+            // dispatch(setPageFalse())
+        }
     }, [dispatch, filteredPokemons])
 
     function onClickReset() {
@@ -56,6 +59,8 @@ function Filter() {
         dispatch(cleanState())
         dispatch(getPokemons())
     }
+
+
 
     return (
         <div className={style.container}>

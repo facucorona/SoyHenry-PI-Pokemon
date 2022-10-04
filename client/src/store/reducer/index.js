@@ -7,7 +7,8 @@ import {
     RESET_STATE,
     FILTER_STATE,
     FILTER_STATE_ORIGIN,
-    ORDER_STATE,    
+    ORDER_STATE,
+    SET_PAGE_FALSE,    
 } from "../actions"
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
     prev : [],
     
     pokemonDetail : [],
-
+    page: false,
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -37,7 +38,13 @@ export default function rootReducer(state = initialState, action) {
     case FILTER_STATE:      
       return { 
         ...state,        
-        pokemons: action.payload 
+        pokemons: action.payload, 
+        page:true,
+    }
+    case SET_PAGE_FALSE:      
+      return { 
+        ...state,                
+        page:action.payload,
     }
     case FILTER_STATE_ORIGIN:
       let result=[]
@@ -55,6 +62,7 @@ export default function rootReducer(state = initialState, action) {
       return { 
         ...state,                
         pokemons: result, 
+        page:true,
     }
   case GET_POKEMONS:
 

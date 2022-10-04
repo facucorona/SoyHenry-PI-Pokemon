@@ -8,6 +8,7 @@ export const FILTER_STATE = "FILTER_STATE";
 export const FILTER_STATE_ORIGIN = "FILTER_STATE_ORIGIN";
 export const ORDER_STATE = "ORDER_STATE";
 export const UNMOUNT_BACKUP = "UNMOUNT_BACKUP";
+export const SET_PAGE_FALSE = "SET_PAGE_FALSE";
 
 
 export function unmountBackup(backupArray){
@@ -24,6 +25,15 @@ export function resetState(resetArray){
         dispatch({
             type: RESET_STATE,
             payload: resetArray,
+        })        
+    }
+}
+
+export function setPageFalse(){
+    return async (dispatch) => {
+        dispatch({
+            type: SET_PAGE_FALSE,
+            payload: false,
         })        
     }
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import style from './styles/Home.module.css'
-import { getPokemons } from '../store/actions/index'
+import { getPokemons, setPageFalse } from '../store/actions/index'
 import Card from './Card'
 import Filter from './Filter'
 import Order from './Order'
@@ -40,6 +40,16 @@ function Home() {
         if (aux > arrayOfPages.length - 1) { return pageIndex }
         return setPageIndex(aux)
     }
+    // console.log(page)
+    let page = useSelector(state => state.page)
+    useEffect(() => {
+
+        if (page === true) {
+            setPageIndex(0)
+            dispatch(setPageFalse())
+        }
+
+    }, [page])
 
     return (
         <div className={style.container}>
@@ -63,6 +73,7 @@ function Home() {
                     </nav>
 
                     <small className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</small><br /><br />
+
                     <input type="button" value="Prev" onClick={e => onCickPrev(e)} />
                     <input type="button" value="Next" onClick={e => onCickNext(e)} />
                 </div>
