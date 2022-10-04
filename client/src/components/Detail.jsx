@@ -1,6 +1,7 @@
 import { React, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
+import Error from './Error'
 import style from './styles/Detail.module.css'
 import { getDetails, cleanDetails } from '../store/actions/index'
 
@@ -30,6 +31,13 @@ export function Detail() {
 
     return (
         <div id="container" className={style.container}>
+            {
+                (detailFetch.image === undefined) && (
+                    <div className="error">
+                        <Error />
+                    </div>
+                )
+            }
 
             <h1>{detailFetch.name}</h1>
 
