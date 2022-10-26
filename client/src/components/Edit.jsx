@@ -8,10 +8,12 @@ function Edit() {
 
     let thisPokemon = useSelector(state => state.pokemonDetail)
     console.log("🚀 ~ file: Edit.jsx ~ line 10 ~ Edit ~ thisPokemon", thisPokemon)
+    let actualTypes = thisPokemon[0].pokemonType.split('~')
+    let [newPokemonObject, setNewPokemonObject] = useState({ ...thisPokemon, pokemonType: thisPokemon[0].pokemonType })
+    console.log("🚀 ~ file: Edit.jsx ~ line 11 ~ Edit ~ newPokemonObject", newPokemonObject)
 
-    // console.log(".....-------------------------------------")
+
     let { id } = useParams()
-    console.log(id)
 
     let dispatch = useDispatch();
 
@@ -20,11 +22,11 @@ function Edit() {
         dispatch(getTypes())
     }, [])
 
+    console.log(id)
 
     let typesFetch = useSelector(state => state.types)
 
-    let [selectedTypes, setSelectedTypes] = useState([])
-    let [newPokemonObject, setNewPokemonObject] = useState()
+    let [selectedTypes, setSelectedTypes] = useState(actualTypes)
 
 
     let regExpName = RegExp(/^[a-zA-Z]+$/)
@@ -139,21 +141,21 @@ function Edit() {
     async function onSubmit(e) {
         e.preventDefault();
         setGlobalAdvert(true)
-        if (nameAdvert === false || hpAdvert === false || defenseAdvert === false || attackAdvert === false || speedAdvert === false || weightAdvert === false || heightAdvert === false || imageAdvert === false || typeAdvert === false) {
-            setGlobalAdvert(false)
-            return
-        } else {
+        // if (nameAdvert === false || hpAdvert === false || defenseAdvert === false || attackAdvert === false || speedAdvert === false || weightAdvert === false || heightAdvert === false || imageAdvert === false || typeAdvert === false) {
+        //     setGlobalAdvert(false)
+        //     return
+        // } else {
 
-            setGlobalAdvert(true)
-            await fetch(`http://localhost:3001/pokemons/edit/${thisPokemon.id}`, {
-                method: 'PUT', // *GET, POST, PUT, DELETE, etc.    
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newPokemonObject) // body data type must match "Content-Type" header
-            });
-            setCreatedOk(false)
-        }
+        setGlobalAdvert(true)
+        await fetch(`http://localhost:3001/pokemons/edit/${thisPokemon[0].id}`, {
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.    
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newPokemonObject) // body data type must match "Content-Type" header
+        });
+        setCreatedOk(false)
+        // }
     }
 
     function onClickType(e) {
@@ -177,17 +179,19 @@ function Edit() {
 
     }
 
-    let thisTypes = []
-    if (thisPokemon.pokemonType) thisTypes = thisPokemon.pokemonType.split("~")
-
+    // let thisTypes = []
+    // if (thisPokemon.pokemonType) thisTypes = thisPokemon.pokemonType.split("~")
 
 
     return (
         <div className={style.container}>
             <h1>EDIT<br />Pokemon on Pokédex</h1>
+
             <br />
             <br />
             <form>
+                <h2>{thisPokemon[0].id}</h2>
+                {/* {setNewPokemonObject({ thisPokemon[0].id })} */}
                 <label>Name: { }</label> <br />
                 <input onChange={e => handleChange(e)} type="text" placeholder={`${thisPokemon[0].name}`} name="name" /><br />
                 <small className={style.allow} hidden={nameAdvert}>Numbers & Symbols not allowed.</small><br /> <br />
@@ -232,19 +236,19 @@ function Edit() {
                 <small className={style.allow} hidden={typeAdvert}>Select 1 or 2 types.</small><br />
 
                 <h3>{
-                    selectedTypes.length === 0 ? thisTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>) :
-                        selectedTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>)
+
+                    selectedTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>)
                 }</h3>
                 <success className={style.created} hidden={addedTypes}>Type/s added!</success> <br />
 
                 <label>Picture URL </label> <br />
-                <input onChange={e => handleChange(e)} type="url" placeholder="Image" name="image" /><br />
+                <input onChange={e => handleChange(e)} type="url" placeholder={`${thisPokemon[0].image}`} name="image" /><br />
                 <small className={style.allow} hidden={imageAdvert}>Insert a valid Image URL-JPG, JPEG, GIF</small><br />
 
 
                 <input type="button" value="Go!" onClick={e => onSubmit(e)} /><br />
                 <small className={style.allow} hidden={globalAdvert}>Please Fill all fields correctly.</small><br />
-                <success className={style.created} hidden={createdOk}>Pokémon Created with Success!</success> <br />
+                <success className={style.created} hidden={createdOk}>Pokémon Edited with Success!</success> <br />
             </form><br /><br />
             <NavLink to="/home">
                 <input type="button" value="Back Home" />
