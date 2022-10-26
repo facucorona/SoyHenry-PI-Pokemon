@@ -246,10 +246,10 @@ router.put('/delete/:id', async (req, res, next)=>{
 
 
 //el primer key/value del objeto req.body DEBE SER id:xxxxxxxxxxxx
-router.put('/edit', async(req, res, next)=>{
+router.put('/edit/:id', async(req, res, next)=>{
     try {      
         let edit = req.body
-        let id= req.body.id
+        let id = req.params.id;
 
         let keys = Object.keys(edit)
         keys.shift()

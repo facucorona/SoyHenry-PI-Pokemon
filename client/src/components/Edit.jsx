@@ -1,15 +1,25 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import style from './styles/Add.module.css'
-import { getTypes } from '../store/actions/index'
+import { getTypes, getDetails } from '../store/actions/index'
 
-function Add() {
+function Edit() {
+
+    let thisPokemon = useSelector(state => state.pokemonDetail)
+    console.log("🚀 ~ file: Edit.jsx ~ line 10 ~ Edit ~ thisPokemon", thisPokemon)
+
+    // console.log(".....-------------------------------------")
+    let { id } = useParams()
+    console.log(id)
 
     let dispatch = useDispatch();
+
     useEffect(() => {
+        dispatch(getDetails(id))
         dispatch(getTypes())
-    }, [dispatch])
+    }, [])
+
 
     let typesFetch = useSelector(state => state.types)
 
@@ -131,12 +141,12 @@ function Add() {
         setGlobalAdvert(true)
         if (nameAdvert === false || hpAdvert === false || defenseAdvert === false || attackAdvert === false || speedAdvert === false || weightAdvert === false || heightAdvert === false || imageAdvert === false || typeAdvert === false) {
             setGlobalAdvert(false)
-
+            return
         } else {
 
             setGlobalAdvert(true)
-            await fetch('http://localhost:3001/pokemons/', {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.    
+            await fetch(`http://localhost:3001/pokemons/edit/${thisPokemon.id}`, {
+                method: 'PUT', // *GET, POST, PUT, DELETE, etc.    
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -144,7 +154,6 @@ function Add() {
             });
             setCreatedOk(false)
         }
-        window.location.href = "/home";
     }
 
     function onClickType(e) {
@@ -168,40 +177,43 @@ function Add() {
 
     }
 
+    let thisTypes = []
+    if (thisPokemon.pokemonType) thisTypes = thisPokemon.pokemonType.split("~")
+
 
 
     return (
         <div className={style.container}>
-            <h1>New Pokemon on Pokedex</h1>
+            <h1>EDIT<br />Pokemon on Pokédex</h1>
             <br />
             <br />
             <form>
-                <label>Name </label> <br />
-                <input onChange={e => handleChange(e)} type="text" placeholder="Name" name="name" /><br />
+                <label>Name: { }</label> <br />
+                <input onChange={e => handleChange(e)} type="text" placeholder={`${thisPokemon[0].name}`} name="name" /><br />
                 <small className={style.allow} hidden={nameAdvert}>Numbers & Symbols not allowed.</small><br /> <br />
 
                 <label>Health Points </label> <br />
-                <input onChange={e => handleChange(e)} type="number" placeholder="Health Points" min="0" name="hp" /><br />
+                <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].hp}`} min="0" name="hp" /><br />
                 <small className={style.allow} hidden={hpAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Defense </label> <br />
-                <input onChange={e => handleChange(e)} type="number" placeholder="Defense" min="0" name="defense" /><br />
+                <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].defense}`} min="0" name="defense" /><br />
                 <small className={style.allow} hidden={defenseAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Attack </label> <br />
-                <input onChange={e => handleChange(e)} type="number" placeholder="Attack" min="0" name="attack" /><br />
+                <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].attack}`} min="0" name="attack" /><br />
                 <small className={style.allow} hidden={attackAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Speed </label> <br />
-                <input onChange={e => handleChange(e)} type="number" placeholder="Speed" min="0" name="speed" /><br />
+                <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].speed}`} min="0" name="speed" /><br />
                 <small className={style.allow} hidden={speedAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Weight </label> <br />
-                <input onChange={e => handleChange(e)} type="number" placeholder="Weight" min="0" name="weight" /><br />
+                <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].weight}`} min="0" name="weight" /><br />
                 <small className={style.allow} hidden={weightAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Height </label> <br />
-                <input onChange={e => handleChange(e)} type="number" placeholder="Height" min="0" name="height" /><br />
+                <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].height}`} min="0" name="height" /><br />
                 <small className={style.allow} hidden={heightAdvert}>Only Natural Numbers allowed.</small><br /> <br />
 
                 <label>Select Types:</label> <br />
@@ -219,7 +231,10 @@ function Add() {
                 <input type="button" value="Ok! Add Types" onClick={e => addTypes(e)} /><br />
                 <small className={style.allow} hidden={typeAdvert}>Select 1 or 2 types.</small><br />
 
-                <h3>{selectedTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>)}</h3>
+                <h3>{
+                    selectedTypes.length === 0 ? thisTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>) :
+                        selectedTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>)
+                }</h3>
                 <success className={style.created} hidden={addedTypes}>Type/s added!</success> <br />
 
                 <label>Picture URL </label> <br />
@@ -238,4 +253,4 @@ function Add() {
     )
 }
 
-export default Add
+export default Edit

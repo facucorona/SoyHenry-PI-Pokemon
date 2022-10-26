@@ -115,7 +115,14 @@ export function Detail() {
 
             <div className="editbuttons">
                 {typeof detailFetch.id !== "number" && <input type="button" value="Delete" onClick={e => deleteThisPokemon(e)} />}
-                {typeof detailFetch.id !== "number" && <input type="button" value="Edit" />}
+                {typeof detailFetch.id !== "number" &&
+
+                    <NavLink to={`/edit/${detailFetch.id}`}>
+                        <input type="button" value="Edit" />
+                    </NavLink>
+
+
+                }
             </div><br />
 
             <NavLink to="/home">
