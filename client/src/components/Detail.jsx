@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import Error from './Error'
 import style from './styles/Detail.module.css'
-import { getDetails, cleanDetails } from '../store/actions/index'
+import { getDetails, cleanDetails, deletePokemon } from '../store/actions/index'
 
 
 export function Detail() {
@@ -11,6 +11,7 @@ export function Detail() {
     // console.log(id)
 
     let dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getDetails(id))
     }, [dispatch, id]);
@@ -28,6 +29,50 @@ export function Detail() {
         objectFetch = detailFetch[0]
         detailFetch = objectFetch
     }
+
+    let pokemonsState = useSelector(state => state.pokemons)
+    let pokemonsBackupState = useSelector(state => state.pokemons_backup)
+
+
+    let arrayDeleted = []
+    async function deleteThisPokemon(e) {
+
+        e.preventDefault();
+        var opcion = window.confirm("Confirma que desea eliminar el Pokémon?");
+
+        if (opcion === true) {
+
+            let responseDelete = await fetch(`http://localhost:3001/pokemons/delete/${detailFetch.id}`, {
+                method: 'PUT', // *GET, POST, PUT, DELETE, etc.    
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // body: JSON.stringify(detailFetch.id) // body data type must match "Content-Type" header
+            })
+
+
+
+            pokemonsState = pokemonsState.filter((p) => {
+                if (p.id !== detailFetch.id) { return p }
+            })
+            pokemonsBackupState = pokemonsBackupState.filter((p) => {
+                if (p.id !== detailFetch.id) { return p }
+            })
+            arrayDeleted[0] = pokemonsState;
+            arrayDeleted[1] = pokemonsBackupState;
+
+            dispatch(deletePokemon(arrayDeleted))
+            alert("Pokémon eliminado!")
+            window.location.href = "/home";
+
+            //verificar que redirecciona al home pero no borra el pokémon
+        } else {
+            return
+        }
+    }
+
+    useEffect(() => {
+    }, [arrayDeleted])
 
     return (
         <div id="container" className={style.container}>
@@ -67,6 +112,11 @@ export function Detail() {
 
             <h2>Pokédex ID:</h2>
             <h3>{detailFetch.id}</h3>
+
+            <div className="editbuttons">
+                {typeof detailFetch.id !== "number" && <input type="button" value="Delete" onClick={e => deleteThisPokemon(e)} />}
+                {typeof detailFetch.id !== "number" && <input type="button" value="Edit" />}
+            </div><br />
 
             <NavLink to="/home">
                 <input type="button" value="Back" />

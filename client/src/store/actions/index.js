@@ -10,7 +10,16 @@ export const ORDER_STATE = "ORDER_STATE";
 export const UNMOUNT_BACKUP = "UNMOUNT_BACKUP";
 export const SET_PAGE_FALSE = "SET_PAGE_FALSE";
 export const CLEAN_DETAILS = "CLEAN_DETAILS";
+export const DELETE_POKEMON = "DELETE_POKEMON";
 
+export function deletePokemon(array) {
+    return (dispatch) => {
+        dispatch({
+            type: DELETE_POKEMON,
+            payload: array,
+        })
+    }
+}
 
 export function unmountBackup(backupArray){
     return async (dispatch) => {

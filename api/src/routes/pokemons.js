@@ -69,7 +69,12 @@ router.get("/", async (req, res, next) => {
         let fullArray = searchDb.concat(searchApi).filter(el => el != null)        
         res.send(fullArray);
     } else {
-      let pokeArrayDb = await Pokemon.findAll({include: Type})    
+      //verificar porque no anda al incluir la relacion Type
+      // let pokeArrayDb = await Pokemon.findAll({include: Type})    
+      let pokeArrayDb = await Pokemon.findAll()  
+      
+      pokeArrayDb = pokeArrayDb.filter(p=> p.logicDelete!==true )
+
       pokeArrayDb.forEach((p)=>{
         let string = "";
               let array = p.pokemonType.split(',')
@@ -222,6 +227,77 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
+
+
+router.put('/delete/:id', async (req, res, next)=>{
+    try{
+      let id = req.params.id;
+      let foundPk = await Pokemon.destroy({             
+            where: {
+                id: [id],
+            }})
+            
+      res.status(200).send("ok")
+    } catch (err) {
+      next(err)
+    }
+})
+
+
+
+//el primer key/value del objeto req.body DEBE SER id:xxxxxxxxxxxx
+router.put('/edit', async(req, res, next)=>{
+    try {      
+        let edit = req.body
+        let id= req.body.id
+
+        let keys = Object.keys(edit)
+        keys.shift()
+
+        let values = Object.values(edit)
+        values.shift() 
+        
+        keys.map(async(k, i)=>{await Pokemon.update({
+            [k]: values[i],
+        }, {
+            where: {
+                id: [id],
+            }})
+        });
+        
+        // let product = await Products.findOne({ where: { id: id } });
+
+        // if (edit.addGenre) {
+        //     edit.addGenre.forEach(async (e) => {
+        //         let genre = await Genre.findOne({ where: { name:  e} });
+        //         await product.addGenre(genre)
+        //     });
+        // }
+        // if (edit.rmvGenre) {
+        //     edit.rmvGenre.forEach(async (e) => {
+        //         let genre = await Genre.findOne({ where: { name:  e} });
+        //         await product.removeGenre(genre)
+        //     });
+        // }
+        // if (edit.addPlat) {
+        //     edit.addPlat.forEach(async (e) => {
+        //         let plat = await Platforms.findOne({ where: { name:  e} });
+        //         await product.addPlatforms(plat)
+        //     });
+        // }
+        // if (edit.rmvPlat) {
+        //     edit.rmvPlat.forEach(async (e) => {
+        //         let plat = await Platforms.findOne({ where: { name:  e} });
+        //         await product.removePlatforms(plat)
+        //     });
+        // }
+        
+        
+       res.status(200).send("Pokémon editado!")
+    } catch (err) {
+        next(err)
+    }
+}) 
 
 module.exports = router;
 

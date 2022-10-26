@@ -10,6 +10,7 @@ import {
     ORDER_STATE,
     SET_PAGE_FALSE,  
     CLEAN_DETAILS,  
+    DELETE_POKEMON,
 } from "../actions"
 
 const initialState = {
@@ -25,6 +26,13 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+  case DELETE_POKEMON:
+    return {
+      ...state,
+      pokemons: action.payload[0],
+      pokemons_backup: action.payload[1],
+    }
   
   case RESET_STATE:
     return { 
