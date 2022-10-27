@@ -94,7 +94,7 @@ function Home() {
                         if (p.id.length > 8) {
                             let array = p.pokemonType.split(',')
                             array.forEach(t => {
-                                string = string + t + " ~ "
+                                string = string + t + " "
                             })
                         }
                         return (

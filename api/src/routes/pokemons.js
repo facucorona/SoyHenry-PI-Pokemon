@@ -25,7 +25,7 @@ router.get("/", async (req, res, next) => {
             if (i.name){
               let typesString = "";
               i.types.forEach((t, index)=>{                
-                typesString = typesString + t.type.name + " ~ "
+                typesString = typesString + t.type.name + " "
               }) 
               i.name = i.name.charAt(0).toUpperCase() + i.name.slice(1)
               // finalString = typesString.substring(0, typesString.length - 1)
@@ -57,7 +57,7 @@ router.get("/", async (req, res, next) => {
               let string = "";
               let array = a.pokemonType.split(',')
               array.forEach(t => {
-                string = string + t + " ~ "})
+                string = string + t + " "})
               a.pokemonType= string
             
             
@@ -79,7 +79,7 @@ router.get("/", async (req, res, next) => {
         let string = "";
               let array = p.pokemonType.split(',')
               array.forEach(t => {
-                string = string + t + " ~ "})
+                string = string + t + " "})
               p.pokemonType= string
       })                 
 
@@ -95,7 +95,7 @@ router.get("/", async (req, res, next) => {
               
               let typesString = "";
               info.types.forEach((t)=>{
-                    typesString = typesString + t.type.name + " ~ "
+                    typesString = typesString + t.type.name + " "
                   })                   
                     info.name = info.name.charAt(0).toUpperCase() + info.name.slice(1)                 
               
@@ -132,7 +132,7 @@ router.get("/:id", async(req, res, next) => {
               
         let typesString = "";
         info.types.forEach((t)=>{
-            typesString = typesString + t.type.name + " ~ "
+            typesString = typesString + t.type.name + " "
             }) 
 
         info.name =info.name.charAt(0).toUpperCase() + info.name.slice(1)
@@ -162,7 +162,7 @@ router.get("/:id", async(req, res, next) => {
                      let string = ""
                                 let array = a.pokemonType.split(',')
                                 array.forEach(t => {
-                                    string = string + t + " ~ "
+                                    string = string + t + " "
                                 })
                                 // string = string.substring(0, a.pokemonType.length - 1)
                                 a.pokemonType = string;

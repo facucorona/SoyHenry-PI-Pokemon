@@ -89,7 +89,7 @@ export function Detail() {
             <img src={detailFetch.image} alt="detailImage" /><br />
 
             <h2>Pokemon Type:</h2>
-            <h3> ~ {detailFetch.pokemonType}</h3>
+            <h3> {detailFetch.pokemonType}</h3>
 
             <h2>Pokemon Health Points:</h2>
             <h3>{detailFetch.hp}</h3>

@@ -155,6 +155,7 @@ function Edit() {
             body: JSON.stringify(newPokemonObject) // body data type must match "Content-Type" header
         });
         setCreatedOk(false)
+        window.location.href = "/home";
         // }
     }
 
