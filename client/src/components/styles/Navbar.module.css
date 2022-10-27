@@ -12,8 +12,10 @@
     position: fixed;
     z-index: 1;
     width: 100vw;
+}
 
-
+.head {
+    font-size: 1.5rem;
 }
 
 .logoHenry {

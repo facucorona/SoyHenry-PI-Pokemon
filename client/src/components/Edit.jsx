@@ -187,12 +187,7 @@ function Edit() {
     return (
         <div className={style.container}>
             <h1>EDIT<br />Pokemon on Pokédex</h1>
-
-            <br />
-            <br />
             <form>
-                <h2>{thisPokemon[0].id}</h2>
-                {/* {setNewPokemonObject({ thisPokemon[0].id })} */}
                 <label>Name: { }</label> <br />
                 <input onChange={e => handleChange(e)} type="text" placeholder={`${thisPokemon[0].name}`} name="name" /><br />
                 <small className={style.allow} hidden={nameAdvert}>Numbers & Symbols not allowed.</small><br /> <br />
@@ -250,7 +245,7 @@ function Edit() {
                 <input type="button" value="Go!" onClick={e => onSubmit(e)} /><br />
                 <small className={style.allow} hidden={globalAdvert}>Please Fill all fields correctly.</small><br />
                 <success className={style.created} hidden={createdOk}>Pokémon Edited with Success!</success> <br />
-            </form><br /><br />
+            </form>
             <NavLink to="/home">
                 <input type="button" value="Back Home" />
             </NavLink>

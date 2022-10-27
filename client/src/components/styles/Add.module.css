@@ -6,7 +6,7 @@
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(0.95rem);
-        font-size: 0.6vw;
+        font-size: 0.9rem;
         margin: 0.5vh;
         box-shadow: 2px 4px 10px 4px #514670,
             inset 0 8px 60px rgba(0, 0, 0, 0.1);
