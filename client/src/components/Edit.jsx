@@ -8,7 +8,8 @@ function Edit() {
 
     let thisPokemon = useSelector(state => state.pokemonDetail)
     console.log("🚀 ~ file: Edit.jsx ~ line 10 ~ Edit ~ thisPokemon", thisPokemon)
-    let actualTypes = thisPokemon[0].pokemonType.split('~')
+    let actualTypes = thisPokemon[0].pokemonType.split(' ')
+
     let [newPokemonObject, setNewPokemonObject] = useState({ ...thisPokemon, pokemonType: thisPokemon[0].pokemonType })
     console.log("🚀 ~ file: Edit.jsx ~ line 11 ~ Edit ~ newPokemonObject", newPokemonObject)
 
@@ -164,6 +165,9 @@ function Edit() {
 
         let arrayTypes = selectedTypes
         arrayTypes = arrayTypes.filter(t => t !== e.target.id)
+
+        arrayTypes = arrayTypes.filter(t => t !== "")
+
         let string = arrayTypes.toString()
         if (string === "" || selectedTypes === []) {
             setTypeAdvert(false)
@@ -190,31 +194,31 @@ function Edit() {
             <form>
                 <label>Name: { }</label> <br />
                 <input onChange={e => handleChange(e)} type="text" placeholder={`${thisPokemon[0].name}`} name="name" /><br />
-                <small className={style.allow} hidden={nameAdvert}>Numbers & Symbols not allowed.</small><br /> <br />
+                <small className={style.allow} hidden={nameAdvert}>Numbers & Symbols not allowed.</small><br />
 
                 <label>Health Points </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].hp}`} min="0" name="hp" /><br />
-                <small className={style.allow} hidden={hpAdvert}>Only Natural Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={hpAdvert}>Only Natural Numbers allowed.</small><br />
 
                 <label>Defense </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].defense}`} min="0" name="defense" /><br />
-                <small className={style.allow} hidden={defenseAdvert}>Only Natural Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={defenseAdvert}>Only Natural Numbers allowed.</small><br />
 
                 <label>Attack </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].attack}`} min="0" name="attack" /><br />
-                <small className={style.allow} hidden={attackAdvert}>Only Natural Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={attackAdvert}>Only Natural Numbers allowed.</small><br />
 
                 <label>Speed </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].speed}`} min="0" name="speed" /><br />
-                <small className={style.allow} hidden={speedAdvert}>Only Natural Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={speedAdvert}>Only Natural Numbers allowed.</small><br />
 
                 <label>Weight </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].weight}`} min="0" name="weight" /><br />
-                <small className={style.allow} hidden={weightAdvert}>Only Natural Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={weightAdvert}>Only Natural Numbers allowed.</small><br />
 
                 <label>Height </label> <br />
                 <input onChange={e => handleChange(e)} type="number" placeholder={`${thisPokemon[0].height}`} min="0" name="height" /><br />
-                <small className={style.allow} hidden={heightAdvert}>Only Natural Numbers allowed.</small><br /> <br />
+                <small className={style.allow} hidden={heightAdvert}>Only Natural Numbers allowed.</small><br />
 
                 <label>Select Types:</label> <br />
                 <small className={style.allow} hidden={addedTypeAdvert}>Value already chosen.</small><br />
@@ -232,9 +236,9 @@ function Edit() {
                 <small className={style.allow} hidden={typeAdvert}>Select 1 or 2 types.</small><br />
 
                 <h3>{
-
                     selectedTypes.map(t => <div key={t} onClick={onClickType} id={t} value={t}>{t}</div>)
                 }</h3>
+
                 <success className={style.created} hidden={addedTypes}>Type/s added!</success> <br />
 
                 <label>Picture URL </label> <br />
