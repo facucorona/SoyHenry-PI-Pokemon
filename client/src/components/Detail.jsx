@@ -42,7 +42,7 @@ export function Detail() {
 
         if (opcion === true) {
 
-            let responseDelete = await fetch(`${process.env.REACT_APP_HOST_BACK}:${process.env.PORT}/pokemons/delete/${detailFetch.id}`, {
+            let responseDelete = await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/delete/${detailFetch.id}`, {
                 method: 'PUT', // *GET, POST, PUT, DELETE, etc.    
                 headers: {
                     'Content-Type': 'application/json'

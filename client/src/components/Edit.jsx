@@ -148,7 +148,7 @@ function Edit() {
         // } else {
 
         setGlobalAdvert(true)
-        await fetch(`${process.env.REACT_APP_HOST_BACK}:${process.env.PORT}/pokemons/edit/${thisPokemon[0].id}`, {
+        await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/edit/${thisPokemon[0].id}`, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.    
             headers: {
                 'Content-Type': 'application/json'
