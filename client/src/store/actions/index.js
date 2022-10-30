@@ -81,7 +81,7 @@ export function orderState(orderedArray){
 
 export function getPokemons(){
     return async (dispatch) => {
-        await fetch(`http://localhost:3001/pokemons`)
+        await fetch(`${process.env.REACT_APP_HOST_BACK}:${process.env.PORT}/pokemons`)
         .then(p=>p.json())
         .then((arrayFetch)=>{
             dispatch({
@@ -96,7 +96,7 @@ export function getPokemons(){
 
 export function getTypes(){
     return async (dispatch) => {
-        await fetch(`http://localhost:3001/types`)
+        await fetch(`${process.env.REACT_APP_HOST_BACK}:${process.env.PORT}/types`)
         .then(p=>p.json())
         .then((arrayFetch)=>{
             dispatch({
@@ -111,7 +111,7 @@ export function getTypes(){
 
 export function getDetails(id){
     return async (dispatch) => {
-        await fetch(`http://localhost:3001/pokemons/${id}`)
+        await fetch(`${process.env.REACT_APP_HOST_BACK}:${process.env.PORT}/pokemons/${id}`)
         .then(p=>p.json())
         .then((arrayFetch)=>{
             dispatch({
@@ -143,7 +143,7 @@ export function cleanState(){
 
 export function search(pk){
     return async (dispatch) => {
-        await fetch(`http://localhost:3001/pokemons/?name=${pk}`)
+        await fetch(`${process.env.REACT_APP_HOST_BACK}:${process.env.PORT}/pokemons/?name=${pk}`)
         .then(p=>p.json())
         .then((arrayFetch)=>{
             dispatch({

@@ -135,7 +135,7 @@ function Add() {
         } else {
 
             setGlobalAdvert(true)
-            await fetch('http://localhost:3001/pokemons/', {
+            await fetch(`${process.env.REACT_APP_HOST_BACK}:${process.env.PORT}/pokemons/`, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.    
                 headers: {
                     'Content-Type': 'application/json'
