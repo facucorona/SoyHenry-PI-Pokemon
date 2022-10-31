@@ -144,7 +144,7 @@ function Add() {
             });
             setCreatedOk(false)
         }
-        window.location.href = "/home";
+        // window.location.href = "/home";
     }
 
     function onClickType(e) {
