@@ -200,7 +200,7 @@ router.post("/", async (req, res, next) => {
     const exist = await Pokemon.findOne({ where: { name: name } });
     if (exist) return res.status(300).json({ info:  `${name} already Exists in DB` });
 
-    await fetch(`http://localhost:3001/types`);
+    await fetch(`${process.env.REACT_APP_HOST_BACK}/types`);
     let newPokemon = await Pokemon.create({
       name: name,
       hp: hp,
