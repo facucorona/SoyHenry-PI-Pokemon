@@ -136,7 +136,7 @@ function Add() {
 
             setGlobalAdvert(true)
             // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`, {
-            await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/`, {
+            await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.    
                 headers: {
                     'Content-Type': 'application/json'
@@ -145,7 +145,7 @@ function Add() {
             });
             setCreatedOk(false)
         }
-        // window.location.href = "/home";
+        window.location.href = "/home";
     }
 
     function onClickType(e) {
