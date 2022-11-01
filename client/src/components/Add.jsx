@@ -135,7 +135,8 @@ function Add() {
         } else {
 
             setGlobalAdvert(true)
-            await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`, {
+            // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`, {
+            await fetch(`https://soyhenry-pi-pokemon-production.up.railway.app/pokemons`, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.    
                 headers: {
                     'Content-Type': 'application/json'
