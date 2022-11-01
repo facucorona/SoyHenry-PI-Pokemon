@@ -145,6 +145,7 @@ function Add() {
             });
             setCreatedOk(false)
         }
+        //redirige a /home
         window.location.href = "/home";
     }
 
