@@ -81,7 +81,7 @@ export function orderState(orderedArray) {
 
 export function getPokemons() {
     return async (dispatch) => {
-        console.log('process.env.REACT_APP_HOST_BACK: ', process.env.REACT_APP_HOST_BACK)
+        // console.log('process.env.REACT_APP_HOST_BACK: ', process.env.REACT_APP_HOST_BACK)
         await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`)
             .then(p => p.json())
             .then((arrayFetch) => {
