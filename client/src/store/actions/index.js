@@ -88,6 +88,7 @@ export function getPokemons() {
     await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`)
       .then((p) => p.json())
       .then((arrayFetch) => {
+        console.log("arrayFetch: ", arrayFetch);
         dispatch({
           type: GET_POKEMONS,
           payload: arrayFetch,
