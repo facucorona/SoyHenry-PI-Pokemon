@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 // const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const { DATABASE_URL } = process.env;
+console.log("DATABASE_URL: ", DATABASE_URL);
 
 const sequelize = new Sequelize(
   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
