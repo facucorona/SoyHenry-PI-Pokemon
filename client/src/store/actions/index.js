@@ -87,7 +87,11 @@ export function getPokemons() {
     );
     // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`)
     await fetch(`https://pokedex-api-luwb.onrender.com/pokemons`)
-      .then((p) => p.json() && console.log("p.json(): ", p.json()))
+      .then((p) => {
+        const jsonData = p.json();
+        console.log("p.json(): ", jsonData);
+        return jsonData;
+      })
       .then((arrayFetch) => {
         console.log("arrayFetch: ", arrayFetch);
         dispatch({
