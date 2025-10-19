@@ -15,12 +15,15 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://pokemon-pi-facucorona.vercel.app"
+  );
   // res.header('Access-Control-Allow-Origin', 'https://pokemon-pi-facucorona.vercel.app');
 
   // update to match the domain you will make the request from
   // res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Credentials", "false");
+  res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
