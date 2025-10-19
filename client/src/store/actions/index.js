@@ -85,7 +85,8 @@ export function getPokemons() {
       "process.env.REACT_APP_HOST_BACK: ",
       process.env.REACT_APP_HOST_BACK
     );
-    await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`)
+    // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`)
+    await fetch(`https://pokedex-api-luwb.onrender.com/pokemons`)
       .then((p) => p.json() && console.log("p.json(): ", p.json()))
       .then((arrayFetch) => {
         console.log("arrayFetch: ", arrayFetch);
@@ -99,7 +100,8 @@ export function getPokemons() {
 
 export function getTypes() {
   return async (dispatch) => {
-    await fetch(`${process.env.REACT_APP_HOST_BACK}/types`)
+    // await fetch(`${process.env.REACT_APP_HOST_BACK}/types`)
+    await fetch(`https://pokedex-api-luwb.onrender.com/types`)
       .then((p) => p.json())
       .then((arrayFetch) => {
         dispatch({
