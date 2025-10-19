@@ -3,7 +3,7 @@ const { Router } = require("express");
 // Ejemplo: const authRouter = require('./auth.js');
 const pokemonsRoute = require("./pokemons.js");
 const typesRoute = require("./types.js");
-const {Pokemon} = require("../db")
+const { Pokemon } = require("../db");
 const router = Router();
 
 // Configurar los routers
@@ -11,8 +11,8 @@ const router = Router();
 
 router.use("/pokemons", pokemonsRoute);
 router.use("/types", typesRoute);
-
-
-
+router.get("/", (req, res) => {
+  res.json({ message: "API funcionando correctamente" });
+});
 
 module.exports = router;
