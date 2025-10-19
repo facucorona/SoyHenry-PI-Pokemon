@@ -8,7 +8,9 @@ console.log("DATABASE_URL: ", DATABASE_URL);
 
 const sequelize = new Sequelize(
   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
-  `${DATABASE_URL}`,
+  // `${DATABASE_URL}`,
+  `DATABASE_URL=postgresql://dbpokemon_rng2_user:0BeORrBK43cKj9DBD3PxmXw6OPWqIhtL@dpg-d3m9hnumcj7s73agg9bg-a/dbpokemon_rng2
+`,
   {
     logging: false, // set to console.log to see the raw SQL queries
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
