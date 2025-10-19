@@ -114,7 +114,8 @@ export function getTypes() {
 
 export function getDetails(id) {
   return async (dispatch) => {
-    await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/${id}`)
+    // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/${id}`)
+    await fetch(`https://pokedex-api-luwb.onrender.com/pokemons/${id}`)
       .then((p) => p.json())
       .then((arrayFetch) => {
         dispatch({
@@ -144,7 +145,8 @@ export function cleanState() {
 
 export function search(pk) {
   return async (dispatch) => {
-    await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/?name=${pk}`)
+    // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/?name=${pk}`)
+    await fetch(`https://pokedex-api-luwb.onrender.com/pokemons/?name=${pk}`)
       .then((p) => p.json())
       .then((arrayFetch) => {
         dispatch({
