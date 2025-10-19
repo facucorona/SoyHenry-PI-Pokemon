@@ -29,13 +29,7 @@ server.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  
-  // Handle preflight OPTIONS requests
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
+  next();
 });
 
 server.use("/", routes);
