@@ -24,7 +24,7 @@ function Edit() {
     dispatch(getTypes());
   }, []);
 
-  console.log(id);
+  // console.log(id);
 
   let typesFetch = useSelector((state) => state.types);
 

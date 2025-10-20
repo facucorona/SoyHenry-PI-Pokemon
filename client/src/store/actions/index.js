@@ -81,19 +81,19 @@ export function orderState(orderedArray) {
 
 export function getPokemons() {
   return async (dispatch) => {
-    console.log(
-      "process.env.REACT_APP_HOST_BACK: ",
-      process.env.REACT_APP_HOST_BACK
-    );
+    // console.log(
+    //   "process.env.REACT_APP_HOST_BACK: ",
+    //   process.env.REACT_APP_HOST_BACK
+    // );
     // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`)
     await fetch(`https://pokedex-api-luwb.onrender.com/pokemons`)
       .then((p) => {
         const jsonData = p.json();
-        console.log("p.json(): ", jsonData);
+        // console.log("p.json(): ", jsonData);
         return jsonData;
       })
       .then((arrayFetch) => {
-        console.log("arrayFetch: ", arrayFetch);
+        // console.log("arrayFetch: ", arrayFetch);
         dispatch({
           type: GET_POKEMONS,
           payload: arrayFetch,
