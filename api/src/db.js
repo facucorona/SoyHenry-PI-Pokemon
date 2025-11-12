@@ -9,7 +9,7 @@ console.log("DATABASE_URL: ", DATABASE_URL);
 const sequelize = new Sequelize(
   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
   // `${DATABASE_URL}`,
-  `postgres://dbpokemon_rng2_user:0BeORrBK43cKj9DBD3PxmXw6OPWqIhtL@dpg-d3m9hnumcj7s73agg9bg-a/dbpokemon_rng2
+  `postgresql://dbpokemon2_user:XWVOAUpMibjOhiko0TgNYru8LaDCZtU3@dpg-d4a39pqdbo4c73c4488g-a/dbpokemon2
 `,
   {
     logging: false, // set to console.log to see the raw SQL queries
