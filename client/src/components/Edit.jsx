@@ -185,7 +185,7 @@ function Edit() {
     setGlobalAdvert(true);
     // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/edit/${thisPokemon[0].id}`, {
     await fetch(
-      `https://pokedex-api-luwb.onrender.com/pokemons/edit/${thisPokemon[0].id}`,
+      `/api/pokemons/edit/${thisPokemon[0].id}`,
       {
         method: "PUT", // *GET, POST, PUT, DELETE, etc.
         headers: {

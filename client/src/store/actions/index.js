@@ -86,7 +86,7 @@ export function getPokemons() {
     //   process.env.REACT_APP_HOST_BACK
     // );
     // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`)
-    await fetch(`https://pokedex-api-luwb.onrender.com/pokemons`)
+    await fetch(`/api/pokemons`)
       .then((p) => {
         const jsonData = p.json();
         // console.log("p.json(): ", jsonData);
@@ -105,7 +105,7 @@ export function getPokemons() {
 export function getTypes() {
   return async (dispatch) => {
     // await fetch(`${process.env.REACT_APP_HOST_BACK}/types`)
-    await fetch(`https://pokedex-api-luwb.onrender.com/types`)
+    await fetch(`/api/types`)
       .then((p) => p.json())
       .then((arrayFetch) => {
         dispatch({
@@ -119,7 +119,7 @@ export function getTypes() {
 export function getDetails(id) {
   return async (dispatch) => {
     // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/${id}`)
-    await fetch(`https://pokedex-api-luwb.onrender.com/pokemons/${id}`)
+    await fetch(`/api/pokemons/${id}`)
       .then((p) => p.json())
       .then((arrayFetch) => {
         dispatch({
@@ -150,7 +150,7 @@ export function cleanState() {
 export function search(pk) {
   return async (dispatch) => {
     // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons/?name=${pk}`)
-    await fetch(`https://pokedex-api-luwb.onrender.com/pokemons/?name=${pk}`)
+    await fetch(`/api/pokemons/?name=${pk}`)
       .then((p) => p.json())
       .then((arrayFetch) => {
         dispatch({

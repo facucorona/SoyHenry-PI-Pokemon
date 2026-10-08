@@ -178,7 +178,7 @@ function Add() {
       setGlobalAdvert(true);
       // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`, {
       // await fetch(`${process.env.REACT_APP_HOST_BACK}/pokemons`, {
-      await fetch(`https://pokedex-api-luwb.onrender.com/pokemons`, {
+      await fetch(`/api/pokemons`, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
           "Content-Type": "application/json",
