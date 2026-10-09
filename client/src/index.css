@@ -157,6 +157,15 @@ img {
   margin-top: 1.75rem;
   padding-top: 1.25rem;
   border-top: 1px solid rgba(81, 70, 112, 0.35);
+
+  /* Idem que arriba: global, y no en Detail.module.css, porque ahí compilaba a
+     `.Detail_editbuttons__1z4KO` y no matcheaba con el DOM. Sin esto el grupo
+     quedaba en `grid-column: auto / auto` a partir de 560px y se estiraba
+     dentro de la primera columna en vez de ocupar la fila entera. Debajo de
+     560px `.container` no es grilla, así que las dos propiedades no hacen
+     nada. */
+  grid-column: 1 / -1;
+  justify-self: center;
 }
 
 .editbuttons input[type='button'] {

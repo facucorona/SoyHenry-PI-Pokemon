@@ -94,27 +94,47 @@
 @media (min-width: 560px) {
   .container {
     display: grid;
-    grid-template-columns: 1fr auto;
+
+    /* Cuatro columnas. Las dos de los extremos son amortiguadores `1fr` SIN
+       items: su único trabajo es repartir el espacio libre para que el bloque
+       label+valor quede centrado en el contenedor.
+
+       Antes era `1fr auto`: la columna de los labels se comía los 504px
+       libres mientras el label más largo mide 178px, y como el valor estaba
+       `text-align: right` en la segunda columna, el hueco entre label y valor
+       era de 421px a 593px sobre 656px de contenido (medido). Ahora el hueco
+       es el `column-gap`, 24px exactos en las ocho filas.
+
+       Por qué labels a la derecha y no a la izquierda: una grilla puede
+       alinear columnas, no parejas. Si el label arrancara siempre en la misma
+       x, el huecoDependería de cuánto mide cada uno y volvería a ser variable
+       (de 24px a 156px con `max-content 1fr`, medido). Para que el label
+       termine siempre en la misma x hay que alinearlo a la derecha. */
+    grid-template-columns: 1fr auto auto 1fr;
     column-gap: 1.5rem;
     text-align: left;
   }
 
+  /* `.editbuttons` y `.error` no van acá: compilan a
+     `.Detail_editbuttons__1z4KO` / `.Detail_error__2hPGt` porque CSS Modules
+     les pone hash, pero Detail.jsx las usa como `className="..."` a secas
+     (string plano), así que nunca matchean con el DOM. `.editbuttons` está
+     como global en index.css y `.error` también. */
   .container > h1,
   .container > img,
-  .editbuttons,
-  .error {
+  .backLink {
     grid-column: 1 / -1;
     justify-self: center;
   }
 
   .container h2 {
-    grid-column: 1;
-    text-align: left;
+    grid-column: 2;
+    text-align: right;
     margin-top: 0.55rem;
   }
 
   .container h3 {
-    grid-column: 2;
-    text-align: right;
+    grid-column: 3;
+    text-align: left;
   }
 }
