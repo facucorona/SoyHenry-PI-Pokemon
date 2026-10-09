@@ -1,22 +1,15 @@
-/* ==========================================================================
-   ERROR
-   --------------------------------------------------------------------------
-   Antes sólo existía `.image`. El `.container` que usa Error.jsx no estaba
-   definido, así que el bloque de error se caía al flujo sin ningún control.
-   ========================================================================== */
-
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 1rem 0;
-}
-
+/* La imagen del loader/error.
+   El GIF original mide 800x600, asi que el tope evita que se agrande de mas en
+   pantallas anchas: sin eso, un `width: 100%` la estiraria por encima de su
+   resolucion nativa. En pantallas chicas el 100% la adapta sola.
+   `margin-inline: auto` la centra cuando llega al tope de 800px, que es lo que
+   hacia el flex original con `justify-content: space-around`. */
 .image {
-  width: min(220px, 60%);
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 18px rgba(11, 10, 18, 0.45));
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+    /* Radio leve: el GIF tiene el fondo gris hasta el borde, y sin esto las
+       esquinas del rectángulo quedan rectas contra el fondo de la página. */
+    border-radius: var(--pk-radius-md);
 }

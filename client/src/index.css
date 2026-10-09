@@ -137,13 +137,16 @@ img {
 
 /* --------------------------------------------------------------------------
    Dos clases que Home.jsx y Detail.jsx usan con `className="..."` a secas
-   (string plano, no módulo). Por eso van acá y no en un *.module.css.
+   (string plano, no módulo). Por eso van acá y no en un *.module.css: dentro
+   de un módulo CSS Modules les pone hash y no matchean con el DOM.
    -------------------------------------------------------------------------- */
 
+/* El bloque de error/loader tiene que ocupar TODA la grilla. Como item caía
+   en una sola celda de ~175px, y la imagen es un porcentaje de su contenedor,
+   quedaba de 140px: la pokéball se veía a 39px en vez de 206px. Con el
+   flex-wrap original el item crecía hasta el ancho del contenedor. */
 .error {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  grid-column: 1 / -1;
 }
 
 .editbuttons {
