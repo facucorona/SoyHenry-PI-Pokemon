@@ -214,110 +214,117 @@ function Add() {
   return (
     <div className={style.container}>
       <h1>New Pokemon on Pokedex</h1>
-      <br />
-      <br />
       <form>
-        <label>Name </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="text"
-          placeholder="Name"
-          name="name"
-        />
-        <br />
-        <small className={style.allow} hidden={nameAdvert}>
-          Numbers & Symbols not allowed.
-        </small>
-        <br /> <br />
-        <label>Health Points </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder="Health Points"
-          min="0"
-          name="hp"
-        />
-        <br />
-        <small className={style.allow} hidden={hpAdvert}>
-          Only Natural Numbers allowed.
-        </small>
-        <br /> <br />
-        <label>Defense </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder="Defense"
-          min="0"
-          name="defense"
-        />
-        <br />
-        <small className={style.allow} hidden={defenseAdvert}>
-          Only Natural Numbers allowed.
-        </small>
-        <br /> <br />
-        <label>Attack </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder="Attack"
-          min="0"
-          name="attack"
-        />
-        <br />
-        <small className={style.allow} hidden={attackAdvert}>
-          Only Natural Numbers allowed.
-        </small>
-        <br /> <br />
-        <label>Speed </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder="Speed"
-          min="0"
-          name="speed"
-        />
-        <br />
-        <small className={style.allow} hidden={speedAdvert}>
-          Only Natural Numbers allowed.
-        </small>
-        <br /> <br />
-        <label>Weight </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder="Weight"
-          min="0"
-          name="weight"
-        />
-        <br />
-        <small className={style.allow} hidden={weightAdvert}>
-          Only Natural Numbers allowed.
-        </small>
-        <br /> <br />
-        <label>Height </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder="Height"
-          min="0"
-          name="height"
-        />
-        <br />
-        <small className={style.allow} hidden={heightAdvert}>
-          Only Natural Numbers allowed.
-        </small>
-        <br /> <br />
-        <label>Select Types:</label> <br />
-        <small className={style.allow} hidden={addedTypeAdvert}>
-          Value already chosen.
-        </small>
-        <br />
-        <select
-          id={"typeSelector"}
-          defaultValue={""}
-          name={"pokemonType"}
-          onChange={(e) => handleSelectChange(e)}
-        >
+        <div className={style.field}>
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            onChange={(e) => handleChange(e)}
+            type="text"
+            placeholder="Name"
+            name="name"
+          />
+          <small className={style.allow} hidden={nameAdvert}>
+            Numbers &amp; Symbols not allowed.
+          </small>
+        </div>
+        <div className={style.grid}>
+          <div className={style.field}>
+            <label htmlFor="hp">Health Points</label>
+            <input
+              id="hp"
+              onChange={(e) => handleChange(e)}
+              type="number"
+              placeholder="Health Points"
+              min="0"
+              name="hp"
+            />
+            <small className={style.allow} hidden={hpAdvert}>
+              Only Natural Numbers allowed.
+            </small>
+          </div>
+        <div className={style.field}>
+            <label htmlFor="defense">Defense</label>
+            <input
+              id="defense"
+              onChange={(e) => handleChange(e)}
+              type="number"
+              placeholder="Defense"
+              min="0"
+              name="defense"
+            />
+            <small className={style.allow} hidden={defenseAdvert}>
+              Only Natural Numbers allowed.
+            </small>
+          </div>
+        <div className={style.field}>
+            <label htmlFor="attack">Attack</label>
+            <input
+              id="attack"
+              onChange={(e) => handleChange(e)}
+              type="number"
+              placeholder="Attack"
+              min="0"
+              name="attack"
+            />
+            <small className={style.allow} hidden={attackAdvert}>
+              Only Natural Numbers allowed.
+            </small>
+          </div>
+        <div className={style.field}>
+            <label htmlFor="speed">Speed</label>
+            <input
+              id="speed"
+              onChange={(e) => handleChange(e)}
+              type="number"
+              placeholder="Speed"
+              min="0"
+              name="speed"
+            />
+            <small className={style.allow} hidden={speedAdvert}>
+              Only Natural Numbers allowed.
+            </small>
+          </div>
+        <div className={style.field}>
+            <label htmlFor="weight">Weight</label>
+            <input
+              id="weight"
+              onChange={(e) => handleChange(e)}
+              type="number"
+              placeholder="Weight"
+              min="0"
+              name="weight"
+            />
+            <small className={style.allow} hidden={weightAdvert}>
+              Only Natural Numbers allowed.
+            </small>
+          </div>
+        <div className={style.field}>
+            <label htmlFor="height">Height</label>
+            <input
+              id="height"
+              onChange={(e) => handleChange(e)}
+              type="number"
+              placeholder="Height"
+              min="0"
+              name="height"
+            />
+            <small className={style.allow} hidden={heightAdvert}>
+              Only Natural Numbers allowed.
+            </small>
+          </div>
+        </div>
+        <div className={style.field}>
+          <label htmlFor="typeSelector">Select Types</label>
+          <small className={style.allow} hidden={addedTypeAdvert}>
+            Value already chosen.
+          </small>
+          <select
+            id={"typeSelector"}
+            defaultValue={""}
+            name={"pokemonType"}
+            onChange={(e) => handleSelectChange(e)}
+          >
           <option value="">Select Type</option>
           {typesFetch?.map((type) => {
             return (
@@ -327,56 +334,58 @@ function Add() {
             );
           })}
         </select>
-        <br />
-        <input
-          type="button"
-          value="Ok! Add Types"
-          onClick={(e) => addTypes(e)}
-        />
-        <br />
-        <small className={style.allow} hidden={typeAdvert}>
-          Select 1 or 2 types.
-        </small>
-        <br />
-        <h3>
-          {selectedTypes.map((t) => (
-            <div key={t} onClick={onClickType} id={t} value={t}>
-              {t}
-            </div>
-          ))}
-        </h3>
-        <success className={style.created} hidden={addedTypes}>
-          Type/s added!
-        </success>{" "}
-        <br />
-        <label>Picture URL </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="url"
-          placeholder="Image"
-          name="image"
-        />
-        <br />
-        <small className={style.allow} hidden={imageAdvert}>
-          Insert a valid Image URL-JPG, JPEG, GIF
-        </small>
-        <br />
-        <input type="button" value="Go!" onClick={(e) => onSubmit(e)} />
-        <br />
+        <div className={style.actions}>
+            <input
+              type="button"
+              value="Ok! Add Types"
+              onClick={(e) => addTypes(e)}
+            />
+          </div>
+          <small className={style.allow} hidden={typeAdvert}>
+            Select 1 or 2 types.
+          </small>
+          <h3 className={style.typeList}>
+            {selectedTypes.map((t) => (
+              <div key={t} onClick={onClickType} id={t} value={t}>
+                {t}
+              </div>
+            ))}
+          </h3>
+          <success className={style.created} hidden={addedTypes}>
+            Type/s added!
+          </success>
+        </div>
+
+        <div className={style.field}>
+          <label htmlFor="image">Picture URL</label>
+          <input
+            id="image"
+            onChange={(e) => handleChange(e)}
+            type="url"
+            placeholder="Image"
+            name="image"
+          />
+          <small className={style.allow} hidden={imageAdvert}>
+            Insert a valid Image URL-JPG, JPEG, GIF
+          </small>
+        </div>
+
+        <div className={style.actions}>
+          <input type="button" value="Go!" onClick={(e) => onSubmit(e)} />
+        </div>
         <small className={style.allow} hidden={globalAdvert}>
           Please Fill all fields correctly.
         </small>
-        <br />
         <success className={style.created} hidden={createdOk}>
           Pokémon Created with Success!
-        </success>{" "}
-        <br />
+        </success>
       </form>
-      <br />
-      <br />
-      <NavLink to="/home">
-        <input type="button" value="Back Home" />
-      </NavLink>
+
+      <div className={style.actions}>
+        <NavLink to="/home" className={style.buttonLink}>
+          Back Home
+        </NavLink>
+      </div>
     </div>
   );
 }

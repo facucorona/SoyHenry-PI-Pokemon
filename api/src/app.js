@@ -32,7 +32,12 @@ server.use((req, res, next) => {
   next();
 });
 
+// Las rutas se montan dos veces a propósito:
+//   "/"    -> como en Vercel, que saca el prefijo /api antes de llamar a la app.
+//   "/api" -> para correr en local, donde el dev server de CRA hace proxy de
+//             /api/* a este proceso y le llega el prefijo intacto.
 server.use("/", routes);
+server.use("/api", routes);
 
 // Error catching endware.
 server.use((err, req, res, next) => {

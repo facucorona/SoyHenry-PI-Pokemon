@@ -56,7 +56,7 @@ function Home() {
             <nav className={style.navFilterOrder}>
                 <div className={style.filterOrder}>
                     <Filter />
-                    <Order /><br /><br />
+                    <Order />
 
                     <nav className={style.navPag}>
                         <ul className={style.ulLabel}>
@@ -64,7 +64,12 @@ function Home() {
                                 arrayOfPages.map((page, index) => {
                                     return (
                                         <li className="pageButtons" key={index}>
-                                            <p className={style.numberLink} onClick={() => setPageIndex(index)}>{index + 1} </p>
+                                            {/* Era un <p onClick>: no se alcanzaba con
+                                                teclado ni tomaba foco. Ahora es un
+                                                botón de verdad. */}
+                                            <button type="button" className={style.numberLink} onClick={() => setPageIndex(index)}>
+                                                {index + 1}
+                                            </button>
                                         </li>
                                     )
                                 })
@@ -72,7 +77,7 @@ function Home() {
                         </ul>
                     </nav>
 
-                    <small className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</small><br /><br />
+                    <small className={style.divPaginationText}>Page {pageIndex + 1} from {arrayOfPages.length}</small>
 
                     <input type="button" value="Prev" onClick={e => onCickPrev(e)} />
                     <input type="button" value="Next" onClick={e => onCickNext(e)} />

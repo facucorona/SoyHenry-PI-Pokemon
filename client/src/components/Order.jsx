@@ -66,7 +66,7 @@ function Order() {
 
     return (
         <div className={style.container}>
-            <label>Select Order</label><br />
+            <label htmlFor="orderSelector">Select Order</label>
             <select id={'orderSelector'} defaultValue="not" onChange={e => handleChange(e)}>
                 <option value="not">Pokédex ID</option>
                 <option value="abc">ABC</option>

@@ -1,4 +1,60 @@
+/* ==========================================================================
+   FILTER
+   --------------------------------------------------------------------------
+   Antes: sólo `padding-top` y `margin-top`. Los <select> salían con el
+   aspecto crudo del navegador y el panel quedaba sin jerarquía.
+   ========================================================================== */
+
 .container {
-    padding-top: 1rem;
-    margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  padding: 0;
+  margin: 0;
+}
+
+.container label {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  /* Antes en amarillo sobre el panel claro: ilegible cuando el wallpaper
+     tenía una zona blanca. El violeta oscuro pasa contraste sobre el vidrio
+     claro; el amarillo queda para los botones negros, que es donde se lee. */
+  color: var(--pk-violet);
+}
+
+.container select {
+  width: 100%;
+  height: var(--pk-tap);
+  padding: 0 0.6rem;
+
+  color: var(--pk-text-on-light);
+  background: var(--pk-glass-strong);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  cursor: pointer;
+  transition: box-shadow 150ms ease-out;
+}
+
+.container select:focus-visible {
+  outline: none;
+  box-shadow: var(--pk-focus);
+}
+
+.container button {
+  height: var(--pk-tap);
+  margin-top: 0.35rem;
+
+  cursor: pointer;
+  color: var(--pk-yellow);
+  background: var(--pk-ink);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  transition: background-color 150ms ease-out, transform 150ms ease-out;
+}
+
+.container button:hover {
+  background: var(--pk-violet);
+  transform: translateY(-1px);
 }

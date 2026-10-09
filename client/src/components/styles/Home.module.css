@@ -1,74 +1,192 @@
-body {
-    padding-left: 0vw;
-}
+/* ==========================================================================
+   HOME
+   --------------------------------------------------------------------------
+   Antes: `.container` usaba `direction: row` (no es propiedad de flex),
+   `align-content: space-around` sin wrap, y el filtro/orden vivían en
+   `width: 10%` y `width: 10vw` (piso pisado por el vw). En una pantalla
+   chica el panel quedaba de 40px de ancho con los <select> colgando.
+   ========================================================================== */
 
 .container {
-    display: flex;
-    direction: row;
-    align-content: space-around;
-    padding-top: 2vw;
-    margin-left: 0px;
-    margin-right: 0px;
-    justify-content: center;
-    width: 100vw;
+  /* El navbar es sticky: ocupa su lugar en el flujo, así que acá no hace
+     falta reservar su altura a mano (antes el padding tenía que adivinar
+     cuántos píxeles ocupa la barra y se equivocaba cuando crecía a dos
+     filas). */
+  padding-top: clamp(1rem, 3vw, 2rem);
+  padding-left: var(--pk-gutter);
+  padding-right: var(--pk-gutter);
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+
+  width: 100%;
+  max-width: var(--pk-maxw);
+  margin: 0 auto;
 }
 
-.pkContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 3rem;
-    justify-content: space-around;
-    border-radius: 5px;
-    align-items: center;
-}
+/* --- panel lateral: filtro + orden + paginación ---------------------------- */
 
 .navFilterOrder {
-    padding-left: 4%;
-    padding-right: 4%;
-    padding-top: 4%;
-    margin-left: 0.1vw;
-    width: 10%;
-    width: 10vw;
-    flex-direction: row;
-    display: flex;
-    text-shadow: 1px 1px 10px rgb(255, 36, 36);
+  flex: 0 0 auto;
+  width: 240px;
+  padding: 1rem;
+
+  /* Antes 0.16 de opacidad: el wallpaper asomaba tanto que el texto depended
+     de qué foto hadía. A 0.72 el panel tiene un fondo propio y el contenido
+     se lee igual en cualquier imagen. */
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(var(--pk-glass-blur));
+  -webkit-backdrop-filter: blur(var(--pk-glass-blur));
+  border: 1px solid var(--pk-ink);
+  border-radius: var(--pk-radius-lg);
+  box-shadow: var(--pk-shadow);
+
+  position: sticky;
+  top: 1rem;
 }
 
-.divPaginationText {
-    color: rgb(183, 183, 183);
-    text-shadow: 0px 4px 10px rgba(9, 9, 9, 0.89);
-    -webkit-text-stroke: 0.002px rgb(165, 165, 165);
+.filterOrder {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--pk-text);
 }
 
-.numberLink {
-    margin: 5px;
-    justify-content: space-around;
+/* --- grilla de tarjetas --------------------------------------------------- */
 
+.pkContainer {
+  flex: 1 1 auto;
+  min-width: 0;
+
+  /* Es un <ul>: sin esto hereda el padding-inline de 40px del navegador y
+     la grilla queda corrida hacia la derecha. */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: grid;
+  /* `auto-fill` + `minmax` deja de pedir un ancho fijo: el número de columnas
+     sale del espacio disponible, así que no hace falta breakpoint por
+     breakpoint. */
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+/* El <li> de la grilla: sin `min-height` la tarjeta no se estira a la fila. */
+.cardContainer {
+  min-width: 0;
+  display: flex;
+}
+
+/* El link envuelve a la Card. Se estira para que toda la celda sea clicable,
+   no sólo el rectángulo de la tarjeta. */
+.navLink {
+  display: flex;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--pk-radius-md);
+}
+
+/* --- paginación ----------------------------------------------------------- */
+
+.navPag {
+  margin: 0;
 }
 
 .ulLabel {
-    text-shadow: 0px 4px 10px rgba(9, 9, 9, 0.89);
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* El amarillo se lee bien sobre los botones negros; sobre el panel claro
+     no. Los números van en violeta oscuro. */
+  color: var(--pk-violet);
+}
 
-    color: rgb(255, 255, 0);
-    flex-direction: row;
-    display: flex;
-    list-style: none;
-    margin-left: 0px;
-    padding-left: 0px;
-    margin-bottom: 0px;
+.numberLink {
+  margin: 0;
+  padding: 0 0.35rem;
+
+  /* Ahora es un <button>: hay que sacarle la apariencia de botón del
+     navegador para que no se vea un recuadro gris dentro del panel. */
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: var(--pk-radius-sm);
+  transition: background-color 150ms ease-out, color 150ms ease-out;
 }
 
 .numberLink:hover {
-    cursor: pointer;
-    color: rgb(226, 147, 1)
+  color: var(--pk-ink);
+  background: var(--pk-yellow);
 }
 
-
 .numberLink:active {
-    font-size: larger;
-    color: rgb(0, 0, 0)
+  color: var(--pk-yellow);
+  background: var(--pk-ink);
+}
+
+.divPaginationText {
+  color: var(--pk-text-on-light);
+  font-size: 0.8rem;
+}
+
+/* Prev / Next: eran inputs sin estilo, defaults crudos del navegador. */
+.filterOrder input[type='button'] {
+  height: var(--pk-tap);
+  padding: 0 1rem;
+  cursor: pointer;
+  color: var(--pk-yellow);
+  background: var(--pk-ink);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  transition: background-color 150ms ease-out, transform 150ms ease-out;
+}
+
+.filterOrder input[type='button']:hover {
+  background: var(--pk-violet);
+  transform: translateY(-1px);
+}
+
+/* Los números de paginación van tabulados: si no, no se llega con teclado. */
+.numberLink:focus-visible {
+  box-shadow: var(--pk-focus);
+}
+
+/* --- responsive ----------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .container {
+    /* En mobile el filtro deja de ser una columna de 240px y pasa arriba,
+         occupying el ancho completo. */
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navFilterOrder {
+    width: 100%;
+    position: static;
+  }
+
+  .pkContainer {
+    /* Menos columnas por fila porque la pantalla es más chica: el
+       `minmax(190px, 1fr)` ya resuelve solo, el límite evita que queden
+       dos columnas de 90px en un teléfono angosto. */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .pkContainer {
+    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  }
 }

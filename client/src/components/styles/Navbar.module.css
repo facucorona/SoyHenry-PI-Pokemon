@@ -1,46 +1,191 @@
+/* ==========================================================================
+   NAVBAR
+   --------------------------------------------------------------------------
+   Antes: alto fijo de 65px, `width: 100%` Y `width: 100vw` en la misma regla
+   (el 100vw sumaba el ancho de la barra de scroll y generaba scroll
+   horizontal), y logo + buscador + botón en una sola fila sin alternativa
+   para mobile.
+   ========================================================================== */
+
 .container {
-    display: flex;
-    justify-content: space-between;
-    background: linear-gradient(to right, rgba(255, 255, 1, 1), rgb(255, 247, 0));
-    border-radius: 0px;
-    height: 65px;
-    width: 100%;
-    margin-top: 0px;
-    align-content: space-around;
-    box-shadow: -2px 2px 10px 0.5px hsl(253, 100%, 58%);
-    border-bottom: 3px solid black;
-    position: fixed;
-    z-index: 1;
-    width: 100vw;
-    overflow: hidden;
-}
+  /* `sticky` en vez de `fixed`: con `fixed` hay que hardcodear la altura del
+     navbar en todos los módulos para compensated el padding, y en <=900px el
+     navbar pasa a dos filas. Esa altura asumida (64px) se quedaba corta y el
+     contenido se metía debajo de la barra. Sticky resuelve la clase de bug
+     sin depender de un número. */
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
-.head {
-    font-size: 1.2rem;
-}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
 
-.small {
-    font-size: 0.6rem;
-    padding-bottom: 0.5rem;
-    margin-bottom: 13px;
+  /* `width` sin unidades, no 100vw: el 100vw incluía la barra de scroll. */
+  width: 100%;
+  min-height: var(--pk-nav-h);
+  padding: 0 clamp(0.75rem, 2.5vw, 1.5rem);
 
+  background: linear-gradient(
+    to right,
+    var(--pk-yellow),
+    var(--pk-yellow-soft)
+  );
+  border-bottom: 3px solid var(--pk-ink);
+  box-shadow: var(--pk-shadow-nav);
 }
 
 .logoHenry {
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
 }
+
+.henryLogo {
+  height: 44px;
+  width: auto;
+  border-radius: var(--pk-radius-sm);
+  flex-shrink: 0;
+}
+
+.head {
+  margin: 0;
+  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  color: var(--pk-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- buscador ------------------------------------------------------------ */
 
 .searchForm {
-    padding-top: 1vw;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-.addButton {
-    padding-top: 1vw;
-    padding-right: 1vw;
+.searchForm input[type='text'] {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 320px;
+  height: var(--pk-tap);
+  padding: 0 0.85rem;
+  color: var(--pk-text-on-light);
+  background: rgba(255, 255, 255, 0.86);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  transition: box-shadow 150ms ease-out, background-color 150ms ease-out;
+}
 
+.searchForm input[type='text']::placeholder {
+  color: #5b5470;
+}
+
+.searchForm input[type='text']:focus-visible {
+  outline: none;
+  box-shadow: var(--pk-focus);
+}
+
+.searchForm input[type='submit'] {
+  flex-shrink: 0;
+  height: var(--pk-tap);
+  padding: 0 1.1rem;
+  cursor: pointer;
+  color: var(--pk-yellow);
+  background: var(--pk-ink);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  transition: transform 150ms ease-out, background-color 150ms ease-out;
+}
+
+.searchForm input[type='submit']:hover {
+  background: var(--pk-violet);
+  transform: translateY(-1px);
+}
+
+.small {
+  display: none;
+  font-size: 0.65rem;
+  color: rgba(11, 10, 18, 0.7);
+}
+
+/* --- botón de alta ------------------------------------------------------- */
+
+.addButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  /* Sin esto el texto queda pegado arriba: al ser un flex container, el texto
+     es un flex item con `align-items: normal` (= stretch), y dentro de la caja
+     estirada se dibuja en el borde superior. Medido: 2px del borde de arriba
+     contra 22px del de abajo. */
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  height: var(--pk-tap);
+  padding: 0 1rem;
+  cursor: pointer;
+  color: var(--pk-ink);
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  /* Es un <a> (NavLink): sin esto hereda el subrayado por defecto. Antes lo
+     tapaba el `* { text-decoration: none }` global de Landing.module.css. */
+  text-decoration: none;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out,
+    background-color 150ms ease-out;
 }
 
 .button:hover {
-    box-shadow: -2px 2px 10px 0.5px hsl(253, 100%, 58%);
+  background: #fff;
+  box-shadow: var(--pk-shadow-nav);
+  transform: translateY(-1px);
+}
 
+/* --- responsive ---------------------------------------------------------- */
+
+/* Tablet: la barra deja de caber en una línea, así que el buscador baja a su
+   propia fila y el resto sigue en la de arriba. */
+@media (max-width: 900px) {
+  .container {
+    flex-wrap: wrap;
+    padding-top: 0.5rem;
+    row-gap: 0.5rem;
+  }
+
+  .searchForm {
+    order: 3;
+    flex: 1 0 100%;
+    padding-bottom: 0.35rem;
+  }
+
+  .searchForm input[type='text'] {
+    max-width: none;
+  }
+}
+
+/* Teléfono (320-560px). Dos filas: arriba logo + marca + botón, abajo el
+   buscador. */
+@media (max-width: 560px) {
+  .head {
+    font-size: 1rem;
+  }
+
+  .henryLogo {
+    height: 36px;
+  }
+
+  .small {
+    display: block;
+  }
+
+  .button {
+    padding: 0 0.75rem;
+  }
 }

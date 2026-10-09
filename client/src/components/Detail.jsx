@@ -132,8 +132,15 @@ export function Detail() {
       </div>
       <br />
 
-      <NavLink to="/home">
-        <input type="button" value="Back" />
+      {/* El Boton queda donde estaba, abajo del grupo. Lo unico que cambia es
+          el estilo: antes era un <input> sin estilo, que salia con el aspecto
+          crudo del navegador, porque el estilo del grupo vive como
+          `.editbuttons input[type='button']` y este esta fuera del div.
+          Ademas el <input> estaba anidado dentro del <a>: HTML invalido
+          (interactivo dentro de interactivo) y no era alcanzable con teclado
+          como control. Ahora el link lleva el texto y el estilo. */}
+      <NavLink to="/home" className={style.backLink}>
+        Back
       </NavLink>
     </div>
   );

@@ -1,13 +1,184 @@
+/* ==========================================================================
+   CAPA GLOBAL
+   --------------------------------------------------------------------------
+   Acá viven las variables de diseño y lo que es compartido por toda la app
+   (body, controles de formulario, superficie del navegador).
+
+   Antes cada módulo CSS repetía los valores y encima seteaba `body`, que es
+   global: Landing y Home se pisaban entre sí. Ahora hay una sola fuente.
+   ========================================================================== */
+
+:root {
+  /* Paleta: el amarillo y el violeta que ya tenía el proyecto. */
+  --pk-yellow: #ffff01;
+  --pk-yellow-soft: #fff700;
+  --pk-violet: #514670;
+  --pk-violet-bright: #7b1fff;
+  --pk-ink: #0b0a12;
+
+  /* Texto. Sobre los wallpapers va unlavanda del mismo violeta, no gris:
+     el gris sobre imagen no pasa contraste y se ve sucio. */
+  --pk-text: #f7f5ff;
+  --pk-text-muted: #cbc4e4;
+  --pk-text-on-light: #16121f;
+  --pk-danger: #ff4d4d;
+  --pk-success: #3dffa5;
+
+  /* Superficies de vidrio. */
+  --pk-glass: rgba(255, 255, 255, 0.36);
+  --pk-glass-strong: rgba(255, 255, 255, 0.82);
+  --pk-glass-thin: rgba(255, 255, 255, 0.16);
+  --pk-glass-blur: 0.75rem;
+
+  /* Radios. Antes el `*` de Landing ponía 7px a todo, incluido cada input. */
+  --pk-radius-sm: 6px;
+  --pk-radius-md: 8px;
+  --pk-radius-lg: 10px;
+  --pk-radius-pill: 999px;
+
+  /* Profundidad: con desplazamiento y difuminado real. */
+  --pk-shadow: 2px 4px 10px 4px var(--pk-violet);
+  --pk-shadow-lift: 0 16px 34px 6px rgba(24, 14, 48, 0.55);
+  --pk-shadow-nav: 0 2px 14px 0 rgba(123, 31, 255, 0.55);
+
+  /* Textura: sobre wallpapers el texto necesita respaldo para no perderse. */
+  --pk-text-shadow: 0 1px 2px rgba(11, 10, 18, 0.9), 0 4px 10px rgba(11, 10, 18, 0.6);
+
+  /* Foco visible. Antes no había ninguno: se navegaba por teclado a ciegas. */
+  --pk-focus: 0 0 0 3px rgba(255, 255, 1, 0.75);
+
+  /* Medidas de layout. */
+  --pk-nav-h: 64px;
+  --pk-tap: 44px;
+  --pk-gutter: clamp(1rem, 3vw, 2.5rem);
+  --pk-maxw: 1400px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* Righteous primero porque es lo que se veía antes en toda la app. */
+  font-family: 'Righteous', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: var(--pk-text);
+  min-height: 100vh;
+
+  /* El fondo venía de Landing.module.css. Va acá para que Home no lo pise. */
+  background-image: url('./components/styles/wallpapers/10.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Los controles de formulario no heredan la fuente del body por defecto: sin
+   esto los botones y selects se veían con la tipografía del sistema mientras
+   el resto usaba Righteous. */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Superficie del navegador: por defecto no la dibuja nadie y es la señal más
+   barata de que la página está armada. */
+::selection {
+  background: var(--pk-yellow);
+  color: var(--pk-ink);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--pk-focus);
+  border-radius: var(--pk-radius-sm);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(11, 10, 18, 0.55);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pk-violet);
+  border: 3px solid rgba(11, 10, 18, 0.55);
+  border-radius: var(--pk-radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pk-violet-bright);
+}
+
+img {
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Dos clases que Home.jsx y Detail.jsx usan con `className="..."` a secas
+   (string plano, no módulo). Por eso van acá y no en un *.module.css.
+   -------------------------------------------------------------------------- */
+
+.error {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.editbuttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(81, 70, 112, 0.35);
+}
+
+.editbuttons input[type='button'] {
+  height: var(--pk-tap);
+  padding: 0 1.4rem;
+  cursor: pointer;
+  color: var(--pk-yellow);
+  background: var(--pk-ink);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  transition: background-color 150ms ease-out, transform 150ms ease-out;
+}
+
+.editbuttons input[type='button']:hover {
+  background: var(--pk-violet);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

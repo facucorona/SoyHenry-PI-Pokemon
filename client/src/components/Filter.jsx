@@ -64,7 +64,10 @@ function Filter() {
 
     return (
         <div className={style.container}>
-            <label>Filter by Type</label><br />
+            {/* Los <br /> que separaban label y select estorban: en un
+                contenedor flex cada uno se vuelve un item extra y suma
+                separaciones. El espacio lo da `gap` en el CSS. */}
+            <label htmlFor="typeSelector">Filter by Type</label>
             <select id={'typeSelector'} defaultValue={""} name={"pokemonType"} onChange={e => handleSelectChange(e)}>
                 <option value="">~ All ~</option>
                 {
@@ -74,21 +77,16 @@ function Filter() {
                         )
                     })
                 }
-            </select><br /><br />
-            <label>Filter by Origin</label><br />
+            </select>
+
+            <label htmlFor="originSelector">Filter by Origin</label>
             <select id={'originSelector'} defaultValue={""} name={"pokemonOrigin"} onChange={e => handleSelectChangeOrigin(e)}>
                 <option value="">~ All ~</option>
                 <option value="db">Created</option>
                 <option value="api">Existing</option>
-            </select><br /><br />
-            <label hidden={notFound}>Not Found</label><br /><br />
+            </select>
 
-            {/* {
-                //boton reset apagado, si se selecciona un filtro se activa
-                (filteredPokemons !== undefined) ? (disabledReset = false)
-                    : (disabledReset)
-            } */}
-            <button onClick={onClickReset}>Reset</button><br /><br /><br />
+            <button onClick={onClickReset}>Reset</button>
         </div>
     )
 }

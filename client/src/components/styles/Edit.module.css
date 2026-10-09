@@ -1,29 +1,116 @@
-    .container {
-        margin-top: 5vw;
-        border: 1px solid black;
-        width: auto;
-        height: auto;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(0.95rem);
-        font-size: 0.9rem;
-        margin: 0.5vh;
-        box-shadow: 2px 4px 10px 4px #514670,
-            inset 0 8px 60px rgba(0, 0, 0, 0.1);
-        padding: 25px;
-        overflow: hidden;
-    }
+/* ==========================================================================
+   ADD / EDIT (comparten este mismo archivo)
+   --------------------------------------------------------------------------
+   Antes: `margin-top: 5vw` y `margin: 0.5vh` en la misma regla (se pisaban),
+   `width: auto; height: auto`, y `padding: 25px` fijo. El contenedor no
+   tenía ancho máximo: en desktop el formulario se estiraba a lo que diera.
+   ========================================================================== */
 
-    .allow {
-        color: rgb(235, 7, 7);
-        text-shadow: 0.1px 0px #000000;
-    }
+.container {
+  width: min(560px, 100% - (var(--pk-gutter) * 2));
+  margin: 1.5rem auto;
 
-    .allow:hover {
-        font-size: small;
-    }
+  padding: clamp(1.25rem, 4vw, 2rem);
 
-    .created {
-        font-size: small;
-        color: rgb(0, 255, 102)
-    }
+  border: 1px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  background: var(--pk-glass-strong);
+  backdrop-filter: blur(0.95rem);
+  -webkit-backdrop-filter: blur(0.95rem);
+
+  box-shadow: var(--pk-shadow),
+    inset 0 8px 60px rgba(0, 0, 0, 0.1);
+
+  color: var(--pk-text-on-light);
+  font-size: 0.9rem;
+}
+
+.container h1 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.25rem, 4vw, 1.7rem);
+  color: var(--pk-ink);
+}
+
+/* --- ritmo del formulario -------------------------------------------------
+   El markup separa cada campo con dos o tres `<br />`. Medido: unos 90 de
+   ellos, 18px cada uno, o sea más de 1600px de blanco en una página de 1790.
+   Se ocultan y el ritmo lo dan los márgenes de abajo. */
+.container br {
+  display: none;
+}
+
+.container label {
+  display: block;
+  margin-top: 0.9rem;
+  margin-bottom: 0.25rem;
+
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--pk-violet);
+}
+
+/* --- campos ---------------------------------------------------------------- */
+
+.container input,
+.container select,
+.container textarea {
+  width: 100%;
+  min-height: var(--pk-tap);
+  margin-bottom: 0.3rem;
+  padding: 0 0.7rem;
+
+  color: var(--pk-text-on-light);
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-sm);
+  transition: box-shadow 150ms ease-out;
+}
+
+.container input:focus-visible,
+.container select:focus-visible,
+.container textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--pk-focus);
+}
+
+.container input[type='submit'],
+.container input[type='button'] {
+  width: auto;
+  margin-top: 0.35rem;
+  margin-bottom: 0.3rem;
+  padding: 0 1.25rem;
+  cursor: pointer;
+  color: var(--pk-yellow);
+  background: var(--pk-ink);
+  transition: background-color 150ms ease-out, transform 150ms ease-out;
+}
+
+.container input[type='submit']:hover,
+.container input[type='button']:hover {
+  background: var(--pk-violet);
+  transform: translateY(-1px);
+}
+
+/* --- avisos de validación --------------------------------------------------
+   OJO con esto. El markup controla estos avisos con el atributo `hidden`:
+
+       <small className={style.allow} hidden={nameAdvert}>...</small>
+
+   `[hidden] { display: none }` viene de la hoja del navegador y tiene
+   especificidad baja, así que un `display` a secas en la clase lo pisa y el
+   aviso se ve SIEMPRE. Por eso el `:not([hidden])`: sólo aplica el estilo
+   cuando el aviso realmente tiene que verse. */
+.allow:not([hidden]) {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #c81e1e;
+  font-size: 0.78rem;
+}
+
+.created:not([hidden]) {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #0f8a52;
+  font-size: 0.78rem;
+}

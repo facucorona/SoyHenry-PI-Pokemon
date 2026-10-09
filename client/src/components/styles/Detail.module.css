@@ -1,15 +1,120 @@
+/* ==========================================================================
+   DETAIL
+   --------------------------------------------------------------------------
+   Antes: `margin: 70px` fijo y `padding: 25px`. En una pantalla de 375px los
+   70px de cada lado se comían más de un tercio del ancho y el contenido
+   quedaba en 235px.
+   ========================================================================== */
+
 .container {
-    border: 1px solid black;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(0.75rem);
-    margin: 70px;
-    box-shadow: 2px 4px 10px 4px #514670,
-        inset 0 8px 60px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 25px;
+  /* El margen ahora es relativo y con piso/máximo con clamp. */
+  margin: 1.5rem auto;
+  width: min(720px, 100% - (var(--pk-gutter) * 2));
 
-    color: rgb(0, 0, 0);
-    text-shadow: 0px 4px 10px rgba(131, 131, 131, 0.89);
-    -webkit-text-stroke: 0.002px rgb(165, 165, 165);
+  padding: clamp(1.25rem, 4vw, 2.5rem);
 
+  border: 1px solid var(--pk-ink);
+  border-radius: var(--pk-radius-lg);
+  background: var(--pk-glass-strong);
+  backdrop-filter: blur(var(--pk-glass-blur));
+  -webkit-backdrop-filter: blur(var(--pk-glass-blur));
+
+  box-shadow: var(--pk-shadow),
+    inset 0 8px 60px rgba(0, 0, 0, 0.1);
+
+  color: var(--pk-text-on-light);
+  text-align: center;
+}
+
+.container h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  color: var(--pk-ink);
+  /* Los títulos de campo se distinguen del valor por peso y color, no sólo
+     por tamaño. */
+}
+
+.container h2 {
+  margin: 1.1rem 0 0.15rem;
+  font-size: 0.8rem;
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pk-violet);
+}
+
+.container h3 {
+  margin: 0;
+  font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+  color: var(--pk-ink);
+}
+
+.container img {
+  width: min(240px, 70%);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(11, 10, 18, 0.3));
+}
+
+/* El Back es un <a> (NavLink) y va fuera del grupo `.editbuttons`, asi que no
+   lo alcanza la regla `.editbuttons input[type='button']` y salia con el
+   aspecto crudo del navegador. Se le da el mismo tratamiento a mano. */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Sin esto queda pegado al borde inferior del grupo: el <br /> que los
+     separaba ya no sirve, porque `.container` pasa a `display: grid` a partir
+     de 560px y el <br> seUbica en otra celda, antes del grupo. Medido: el
+     grupo terminaba en y=387 y el Back arrancaba en y=387. */
+  margin-top: 0.6rem;
+
+  height: var(--pk-tap);
+  padding: 0 1.4rem;
+  color: var(--pk-yellow);
+  background: var(--pk-ink);
+  border: 2px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
+  text-decoration: none;
+
+  transition: background-color 150ms ease-out, transform 150ms ease-out;
+}
+
+.backLink:hover {
+  background: var(--pk-violet);
+  transform: translateY(-1px);
+}
+
+/* Los stats van en dos columnas en desktop y se apilan en mobile, en vez de
+   una lista de 12 líneas que obligaba a scrollear. Las columnas van
+   explícitas: confiado en el auto-placement los labels terminaban a la
+   derecha del valor y se leía al revés. */
+@media (min-width: 560px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1.5rem;
+    text-align: left;
+  }
+
+  .container > h1,
+  .container > img,
+  .editbuttons,
+  .error {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  .container h2 {
+    grid-column: 1;
+    text-align: left;
+    margin-top: 0.55rem;
+  }
+
+  .container h3 {
+    grid-column: 2;
+    text-align: right;
+  }
 }

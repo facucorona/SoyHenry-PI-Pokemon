@@ -1,32 +1,83 @@
+/* ==========================================================================
+   CARD
+   --------------------------------------------------------------------------
+   Antes: `width: 330px; height: 430px` fijos, y al hover pasaba a 430x530.
+   Eso movía toda la grilla (los vecinos salían empujados) y en touch, donde
+   no hay hover, la tarjeta se quedaba en el tamaño fijo.
+   Ahora la tarjeta ocupa su celda y el hover sólo la levanta con transform.
+   ========================================================================== */
+
 .container {
-    border: 1px solid black;
-    width: 330px;
-    height: 430px;
-    border-radius: 8px;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
 
-    background: rgba(255, 255, 255, 0.361);
-    backdrop-filter: blur(0.75rem);
+  /* Sin width/height fijos: la define la grilla del contenedor. */
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  padding: 1rem 0.75rem;
 
-    box-shadow: 2px 4px 10px 4px #514670;
+  overflow: hidden;
+  border: 1px solid var(--pk-ink);
+  border-radius: var(--pk-radius-md);
 
-    font-size: 1rem;
+  background: var(--pk-glass);
+  backdrop-filter: blur(var(--pk-glass-blur));
+  -webkit-backdrop-filter: blur(var(--pk-glass-blur));
 
-    color: rgb(0, 0, 0);
-    text-shadow: 0px 4px 10px rgb(203, 203, 203);
-    -webkit-text-stroke: 0.002px rgb(165, 165, 165);
+  box-shadow: var(--pk-shadow);
+  color: var(--pk-text-on-light);
+  text-shadow: none;
 
+  /* La transición va sobre transform/shadow, nunca sobre width/height. */
+  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.container:hover,
+.container:focus-within {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: var(--pk-shadow-lift);
+  z-index: 2;
+}
+
+/* En touch no hay hover: un transform pegado se sente como bug. */
+@media (hover: none) {
+  .container:hover,
+  .container:focus-within {
+    transform: none;
+    box-shadow: var(--pk-shadow);
+  }
+}
+
+.container h1,
+.container h2 {
+  margin: 0;
+  text-align: center;
+  color: var(--pk-text-on-light);
+  text-shadow: none;
+}
+
+.container h1 {
+  font-size: 1.15rem;
+}
+
+.container h2 {
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: var(--pk-violet);
 }
 
 .image {
-    width: 80%;
-    height: 60%;
-
-}
-
-.container:hover {
-    width: 430px;
-    height: 530px;
-    /* transition: 0.2s; */
-    transition: all 200ms linear;
+  width: 100%;
+  /* Antes `height: 60%` estiraba la imagen. Con object-fit la poke se ve
+     entera y sin deformar. */
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: var(--pk-radius-sm);
+  filter: drop-shadow(0 6px 10px rgba(11, 10, 18, 0.35));
 }

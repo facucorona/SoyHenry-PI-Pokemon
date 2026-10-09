@@ -229,105 +229,115 @@ function Edit() {
     <div className={style.container}>
       <h1>
         EDIT
-        <br />
         Pokemon on Pokédex
       </h1>
       <form>
-        <label>Name: {}</label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="text"
-          placeholder={`${thisPokemon[0].name}`}
-          name="name"
-        />
-        <br />
+        <div className={style.field}>
+        <label htmlFor="name">Name: {}</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="text"
+            placeholder={`${thisPokemon[0].name}`}
+            name="name"
+            />
         <small className={style.allow} hidden={nameAdvert}>
           Numbers & Symbols not allowed.
         </small>
-        <br />
-        <label>Health Points </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder={`${thisPokemon[0].hp}`}
-          min="0"
-          name="hp"
-        />
-        <br />
+        </div>
+
+        <div className={style.grid}>
+        <div className={style.field}>
+        <label htmlFor="hp">Health Points</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="number"
+            placeholder={`${thisPokemon[0].hp}`}
+            min="0"
+            name="hp"
+            />
         <small className={style.allow} hidden={hpAdvert}>
           Only Natural Numbers allowed.
         </small>
-        <br />
-        <label>Defense </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder={`${thisPokemon[0].defense}`}
-          min="0"
-          name="defense"
-        />
-        <br />
+        </div>
+
+        <div className={style.field}>
+        <label htmlFor="defense">Defense</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="number"
+            placeholder={`${thisPokemon[0].defense}`}
+            min="0"
+            name="defense"
+            />
         <small className={style.allow} hidden={defenseAdvert}>
           Only Natural Numbers allowed.
         </small>
-        <br />
-        <label>Attack </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder={`${thisPokemon[0].attack}`}
-          min="0"
-          name="attack"
-        />
-        <br />
+        </div>
+
+        <div className={style.field}>
+        <label htmlFor="attack">Attack</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="number"
+            placeholder={`${thisPokemon[0].attack}`}
+            min="0"
+            name="attack"
+            />
         <small className={style.allow} hidden={attackAdvert}>
           Only Natural Numbers allowed.
         </small>
-        <br />
-        <label>Speed </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder={`${thisPokemon[0].speed}`}
-          min="0"
-          name="speed"
-        />
-        <br />
+        </div>
+
+        <div className={style.field}>
+        <label htmlFor="speed">Speed</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="number"
+            placeholder={`${thisPokemon[0].speed}`}
+            min="0"
+            name="speed"
+            />
         <small className={style.allow} hidden={speedAdvert}>
           Only Natural Numbers allowed.
         </small>
-        <br />
-        <label>Weight </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder={`${thisPokemon[0].weight}`}
-          min="0"
-          name="weight"
-        />
-        <br />
+        </div>
+
+        <div className={style.field}>
+        <label htmlFor="weight">Weight</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="number"
+            placeholder={`${thisPokemon[0].weight}`}
+            min="0"
+            name="weight"
+            />
         <small className={style.allow} hidden={weightAdvert}>
           Only Natural Numbers allowed.
         </small>
-        <br />
-        <label>Height </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="number"
-          placeholder={`${thisPokemon[0].height}`}
-          min="0"
-          name="height"
-        />
-        <br />
+        </div>
+
+        <div className={style.field}>
+        <label htmlFor="height">Height</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="number"
+            placeholder={`${thisPokemon[0].height}`}
+            min="0"
+            name="height"
+            />
         <small className={style.allow} hidden={heightAdvert}>
           Only Natural Numbers allowed.
         </small>
-        <br />
-        <label>Select Types:</label> <br />
+        </div>
+        </div>
+
+        <div className={style.field}>
+        <label htmlFor="typeSelector">Select Types</label>
+
         <small className={style.allow} hidden={addedTypeAdvert}>
           Value already chosen.
         </small>
-        <br />
+
         <select
           id={"typeSelector"}
           defaultValue={""}
@@ -343,18 +353,17 @@ function Edit() {
             );
           })}
         </select>
-        <br />
-        <input
-          type="button"
-          value="Ok! Add Types"
-          onClick={(e) => addTypes(e)}
-        />
-        <br />
+        <div className={style.actions}>
+          <input
+            type="button"
+            value="Ok! Add Types"
+            onClick={(e) => addTypes(e)}
+          />
+        </div>
         <small className={style.allow} hidden={typeAdvert}>
           Select 1 or 2 types.
         </small>
-        <br />
-        <h3>
+        <h3 className={style.typeList}>
           {selectedTypes.map((t) => (
             <div key={t} onClick={onClickType} id={t} value={t}>
               {t}
@@ -363,34 +372,38 @@ function Edit() {
         </h3>
         <success className={style.created} hidden={addedTypes}>
           Type/s added!
-        </success>{" "}
-        <br />
-        <label>Picture URL </label> <br />
-        <input
-          onChange={(e) => handleChange(e)}
-          type="url"
-          placeholder={`${thisPokemon[0].image}`}
-          name="image"
-        />
-        <br />
+        </success>
+        </div>
+
+        <div className={style.field}>
+        <label htmlFor="image">Picture URL</label>
+            <input
+            onChange={(e) => handleChange(e)}
+            type="url"
+            placeholder={`${thisPokemon[0].image}`}
+            name="image"
+            />
         <small className={style.allow} hidden={imageAdvert}>
           Insert a valid Image URL-JPG, JPEG, GIF
         </small>
-        <br />
-        <input type="button" value="Go!" onClick={(e) => onSubmit(e)} />
-        <br />
+        </div>
+
+        <div className={style.actions}>
+          <input type="button" value="Go!" onClick={(e) => onSubmit(e)} />
+        </div>
         <small className={style.allow} hidden={globalAdvert}>
           Please Fill all fields correctly.
         </small>
-        <br />
         <success className={style.created} hidden={createdOk}>
           Pokémon Edited with Success!
-        </success>{" "}
-        <br />
+        </success>
       </form>
-      <NavLink to="/home">
-        <input type="button" value="Back Home" />
-      </NavLink>
+
+      <div className={style.actions}>
+        <NavLink to="/home" className={style.buttonLink}>
+          Back Home
+        </NavLink>
+      </div>
     </div>
   );
 }

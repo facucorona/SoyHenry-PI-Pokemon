@@ -25,20 +25,30 @@ function Navbar() {
             <div className={style.logoHenry}>
                 <NavLink to="/">
 
-                    <img src="https://assets.soyhenry.com/LOGO-REDES-01_og.jpg" alt="" className={style.henryLogo} height="60px" />
+                    <img src="https://assets.soyhenry.com/LOGO-REDES-01_og.jpg" alt="" className={style.henryLogo} height="44px" />
                 </NavLink>
                 <h1 className={style.head}>SoyHenry Pokédex</h1>
             </div>
 
-            <form onSubmit={onSubmitSearch} className={style.searchForm}>
-                <input type="text" placeholder="Search Pokémon" onChange={onChangeSearch} value={searchState} />
-                <input type="submit" value="Go!" /><br />
-                <small className={style.small} >Empty Search for All Pokémon</small><br /><br />
+            {/* Los <br /> que separaban los campos estorban con el layout flex:
+                el espacio ahora lo dan gap y padding en el CSS. */}
+            <form onSubmit={onSubmitSearch} className={style.searchForm} role="search">
+                <input
+                    type="text"
+                    aria-label="Search Pokémon"
+                    placeholder="Search Pokémon"
+                    onChange={onChangeSearch}
+                    value={searchState}
+                />
+                <input type="submit" value="Go!" />
+                <small className={style.small}>Empty Search for All Pokémon</small>
             </form>
 
-
-            <NavLink to="/add" className={style.addButton}>
-                <input className={style.button} type="button" value="New Pokémon" /><br />
+            {/* Antes era un <input type="button"> dentro del <a>, que es HTML
+                inválido (interactivo dentro de interactivo) y no era reachable
+                con teclado como un control. Ahora el link es el botón. */}
+            <NavLink to="/add" className={`${style.addButton} ${style.button}`}>
+                New Pokémon
             </NavLink>
 
         </div>

@@ -1,3 +1,22 @@
+/* ==========================================================================
+   ERROR
+   --------------------------------------------------------------------------
+   Antes sólo existía `.image`. El `.container` que usa Error.jsx no estaba
+   definido, así que el bloque de error se caía al flujo sin ningún control.
+   ========================================================================== */
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
 .image {
-    width: 100%;
+  width: min(220px, 60%);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(11, 10, 18, 0.45));
 }

@@ -107,3 +107,6 @@ dist
 package-lock.json
 .vercel
 .env*
+
+# build del cliente (create-react-app)
+/client/build
